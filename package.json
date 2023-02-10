@@ -1,0 +1,24 @@
+{
+  "name": "baan-management",
+  "version": "1.0.0",
+  "description": "store baan of marriages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "satrt": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shubhambishnoi3629/baan-management-softwere.git"
+  },
+  "author": "shubham bishnoi 1008",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shubhambishnoi3629/baan-management-softwere/issues"
+  },
+  "homepage": "https://github.com/shubhambishnoi3629/baan-management-softwere#readme",
+  "type": "module",
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
