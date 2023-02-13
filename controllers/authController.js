@@ -7,7 +7,7 @@ export class AuthController {
     const customer = await customerService.login(req.body.email, req.body.password);
 
     if (!customer) {
-      res.send({
+      res.status(404).send({
         message: 'customer not found',
       });
     } else {

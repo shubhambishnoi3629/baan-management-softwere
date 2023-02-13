@@ -10,10 +10,10 @@ export class BhaaiService {
     });
   }
 
-  async getBhaaiById(id) {
+  async getBhaaiById(id, customerId) {
     return BhaaiModel.findOne({
       _id: id,
-     
+      customerId,
     });
   }
 

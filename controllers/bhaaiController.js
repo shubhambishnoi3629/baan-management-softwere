@@ -1,10 +1,11 @@
 import { bhaaiService } from "../services/index.js";
+import { jwtAuthentication } from "../utils/jwt.js";
 
 export class BhaaiController {
 
   static async getBhaai(req, res) {
     const customer = jwtAuthentication.verifyToken(req);  
-    const bhaai = await bhaaiService.getAll(customer.id);
+    const bhaai = await bhaaiService.getAll(customer._id);
 
     res.send(bhaai);
   }
@@ -13,14 +14,15 @@ export class BhaaiController {
     const customer = jwtAuthentication.verifyToken(req);  
     const bhaai = await bhaaiService.createBhaai({
       ...req.body,
-      customerId: customer.id,
+      customerId: customer._id,
     });
 
     res.send(bhaai);
   }
 
   static async getBhaaiById(req, res) {
-    const bhaai = await bhaaiService.getBhaaiById(req.params.id);
+    const customer = jwtAuthentication.verifyToken(req);  
+    const bhaai = await bhaaiService.getBhaaiById(req.params.id, customer._id);
 
     res.send(bhaai);
   }

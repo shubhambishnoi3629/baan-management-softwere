@@ -21,9 +21,9 @@ const swaggerDocument = YAML.load("./docs/openapi.yml");
 app.use('/api-docs', swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerDocument));
 app.use('/api', appRouter);
 
-app.use('/assets', express.static('./fe',{root:fs.realpathSync('.')}));
+app.use('/', express.static('./fe', {root:fs.realpathSync('.')}));
 app.use('/', (req, res) => {
-  res.sendFile('./fe/index.html',{root:fs.realpathSync('.')});
+  res.sendFile('./fe/index.html', {root:fs.realpathSync('.')});
 });
 app.listen(environment.appPort, () => {
   console.log(`BMS is running on ${environment.appPort}`);
