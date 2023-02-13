@@ -4,8 +4,10 @@ export class BhaaiService {
   
   constructor() { };
 
-  async getAll() {
-    return BhaaiModel.find();
+  async getAll(customerId) {
+    return BhaaiModel.find({
+      customerId: customerId,
+    });
   }
 
   async getBhaaiById(id) {

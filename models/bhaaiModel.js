@@ -14,6 +14,10 @@ const bhaaiSchema = new mongoose.Schema ({
     required: true,
     type: String
   },
+  customerId:{
+    required: true,
+    type: String
+  },
 });
 
 export const BhaaiModel = mongoose.model('bhaai', bhaaiSchema);  
