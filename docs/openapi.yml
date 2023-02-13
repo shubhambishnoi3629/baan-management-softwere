@@ -2,6 +2,8 @@ openapi : "3.0.3"
 info:
   title : Baan management API overview
   version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
 paths:
   /bhaai:
     get:
@@ -249,12 +251,12 @@ components:
       allOf:
         - $ref: '#/components/schemas/BhaaiBase'
       properties:
-        id:
+        _id:
           type: string
           format: uuid
           example: fsdfsdf-fsdfsdf-sdfsdf-fsdf3
       required:
-        - id
+        - _id
       additionalProperties: false
     BhaaiBase:
       type: object
@@ -307,12 +309,17 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaanBase'
       properties:
-        id:
+        _id:
           type: string
           format: uuid
           example: fsdfsdf-fsdfsdf-sdfsdf-fsdf3
+        BhaaiId:
+          type: string
+          format: uuid
+          example: addf-dddfg-hhjj-hhjk
       required:
-        - id
+        - _id
+        - bhaaiId
       additionalProperties: false
     GiveBaan:
       type: object
