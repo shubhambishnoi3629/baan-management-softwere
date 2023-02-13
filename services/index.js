@@ -1,5 +1,5 @@
 import { BaanService } from "./baanService.js";
-import { BhaaiService } from "./bhaaiservice.js";
+import { BhaaiService } from "./bhaaiService.js";
 
 
 export const baanService = new BaanService();
