@@ -4,15 +4,45 @@ export class BaanService {
   
   constructor() { };
 
-  async getAll(bhaaiId) {
+  async getAll(bhaaiId, customerId) {
     return BaanModel.find({
-      bhaaiId: bhaaiId
+      bhaaiId: bhaaiId,
+      customerId,
     });
   }
 
-  async getBaanById(id) {
+  async search(customerId, searchBy) {
+    return BaanModel.find({
+      ...searchBy,
+      customerId,
+    });
+  }
+
+  async getTotalAmount(bhaaiId, customerId) {
+    const agg =  (await BaanModel.aggregate([
+      { 
+        $match: {
+          bhaaiId,
+          customerId,
+        },
+      },
+      { 
+        $group: { 
+          _id : null, 
+          sum : { 
+            $sum: "$amount"
+          },
+        },
+      },
+    ]));
+    
+    return agg[0].sum;
+  }
+
+  async getBaanById(id, customerId) {
     return BaanModel.findOne({
-      _id: id
+      _id: id,
+      customerId,
     });
   }
 
@@ -22,10 +52,11 @@ export class BaanService {
     return baan;
   }
 
-  async updateBaanById(id, data) {
+  async updateBaanById(id, data, customerId) {
     const baan = await BaanModel.findOneAndUpdate(
       { 
-        _id: id
+        _id: id,
+        customerId,
       },
       {
         $set: data
@@ -38,9 +69,10 @@ export class BaanService {
     return baan;
   }
 
-  async deleteBaanById(id) {
+  async deleteBaanById(id, customerId) {
     return BaanModel.deleteOne({
-      id: id
+      id: id,
+      customerId,
     });
   }
 }

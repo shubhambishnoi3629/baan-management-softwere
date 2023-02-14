@@ -17,10 +17,13 @@ app.use(cors());
 database.init();
 
 const swaggerDocument = YAML.load("./docs/openapi.yml");
-
 app.use('/api-docs', swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerDocument));
 app.use('/api', appRouter);
 
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store');
+  next();
+});
 app.use('/', express.static('./fe', {root:fs.realpathSync('.')}));
 app.use('/', (req, res) => {
   res.sendFile('./fe/index.html', {root:fs.realpathSync('.')});

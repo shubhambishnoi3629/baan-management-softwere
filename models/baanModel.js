@@ -30,6 +30,10 @@ const baanSchema = new mongoose.Schema({
     required: true,
     type: Number
   },
+  customerId:{
+    required: true,
+    type: String
+  },
   bhaaiId: {
     required: true,
     type: String    

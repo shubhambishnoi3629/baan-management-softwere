@@ -1,4 +1,4 @@
-import { bhaaiService } from "../services/index.js";
+import { baanService, bhaaiService } from "../services/index.js";
 import { jwtAuthentication } from "../utils/jwt.js";
 
 export class BhaaiController {
@@ -21,10 +21,14 @@ export class BhaaiController {
   }
 
   static async getBhaaiById(req, res) {
-    const customer = jwtAuthentication.verifyToken(req);  
+    const customer = jwtAuthentication.verifyToken(req);
+    const isTotal = req.query.total;
     const bhaai = await bhaaiService.getBhaaiById(req.params.id, customer._id);
-
-    res.send(bhaai);
+  
+    res.send({
+      ...bhaai.toJSON(),
+      total: isTotal == 1 ? await baanService.getTotalAmount(req.params.id, customer._id) : 0
+    });
   }
 
   static async updateBhaaiById(req, res) {
@@ -33,9 +37,27 @@ export class BhaaiController {
     res.send(bhaai);
   }
 
-  static async deleteBhaaiById (req, res) {
+  static async deleteBhaaiById(req, res) {
     await bhaaiService.deleteBhaaiById(req.params.id);
 
     res.send({ success: true });
+  }
+
+  static async giveBaan (req, res) {
+    const customer = jwtAuthentication.verifyToken(req); 
+    const bhaai = await bhaaiService.getOrCreateBhaai("BAAN GIVEN", customer._id);
+    const baan = await baanService.getBaanById(req.body.baanId, customer._id );
+    const newBaan = await baanService.createBaan({
+      firstName: baan.firstName,
+      lastName: baan.lastName,
+      fathersName: baan.fathersName,
+      address: baan.address,
+      nickName: baan.nickName,
+      bhaaiId: bhaai._id,
+      amount: -req.body.amount,
+      customerId: customer._id
+    });
+
+    res.send(newBaan);
   }
 }

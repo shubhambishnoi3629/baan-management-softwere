@@ -41,8 +41,23 @@ export class BhaaiService {
 
   async deleteBhaaiById(id) {
     return BhaaiModel.deleteOne({
-      id: id,
-     
+      _id: id,
+    });
+  }
+
+  async getOrCreateBhaai(marriage,customerId) {
+    const bhaai = await BhaaiModel.findOne({
+      marriage,
+      customerId,
+    });
+    
+    if (bhaai) {
+      return bhaai;
+    }
+    return BhaaiModel.create({
+      marriage,
+      customerId,
+      date: (new Date()).toISOString(),
     });
   }
 }
