@@ -239,6 +239,8 @@ paths:
               schema:
                 $ref: 
   /pariwar/{id}:
+    parameters:
+      - $ref: '#/components/schemas/ResourceId'
     put:
       tags:
         - pariwar
@@ -264,9 +266,9 @@ paths:
       responses:
         '200':
           description: ok
-  /pariwar/:id/:roles:
+  /pariwar/{id}/roles:
     parameters:
-      - $ref: 
+      - $ref: '#/components/parameters/ResourceId'
     get:
       parameters:
         - $ref: 
@@ -281,7 +283,14 @@ paths:
             application/json; charset=utf-8:
               schema:
                 $ref: ''
-  /pariwar/:pariwarId/nimta:
+    post:
+      tags:
+        - customer
+      operationId: createCustomer
+      summary: to create a customer 
+  /pariwar/{pariwarId}/nimta:
+    parameters:
+      - $ref: '#/components/parameters/PariwarId'
     get:
       tags:
         - Nimta
@@ -292,7 +301,10 @@ paths:
         - Nimta
       operationId:  createNimta  
       summary:  to create a nimta
-  /pariwar/:pariwarId/nimta/:id:
+  /pariwar/{pariwarId}/nimta/{id}:
+    parameters:
+      - $ref: '#/components/parameters/PariwarId'
+      - $ref: '#/components/parameters/ResourceId'
     put:
       tags:
         - Nimta
@@ -303,13 +315,18 @@ paths:
         - Nimta
       operationId: deleteNimta
       summary: to delete a nimta
-  /pariwar/:pariwarId/nimta/:id/addRelatives:
+  /pariwar/{pariwarId}/nimta/{id}/addRelatives:
+    parameters:
+      - $ref: '#/components/parameters/PariwarId'
+      - $ref: '#/components/parameters/ResourceId'
     post:
       tags:
         - Nimta
       operationId: addRelatives
       summary: to add relatives in nimta
-  /pariwar/:pariwarId/relative:
+  /pariwar/{pariwarId}/relative:
+    parameters:
+      - $ref: '#/components/parameters/PariwarId'
     get:
       tags:
         - Relative
@@ -322,7 +339,10 @@ paths:
         - Relative
       operationId:  createrelative
       summary:   to create a relative
-  /pariwar/pariwarId/relative/{id}:
+  /pariwar/{pariwarId}/relative/{id}:
+    parameters:
+      - $ref: '#/components/parameters/PariwarId'
+      - $ref: '#/components/parameters/ResourceId'
     put:
       tags:
         - Relative
@@ -334,19 +354,31 @@ paths:
       operationId: deleterelative
       summary: to delete relative
 /search:
-    get:
-      tags:
-        - Customer
-      operationId: getCustomer
-      summary: to find a customer   
-    post:
-      tags:
-        - customer
-      operationId: createCustomer
-      summary: to create a customer            
+  parameters:
+    - $ref: '#/components/parameters/Email'
+  get:
+    tags:
+      - Customer
+    operationId: getCustomer
+    summary: to find a customer              
 
 components:
   parameters:
+    Email:
+      description: email for search
+      in: query
+      name: 'email'
+      schema:
+        type: string
+        example: godara64022@gmail.com
+    PariwarId:
+      requried: true
+      description: id of pariwar to be worked on 
+      in: path 
+      name: 'id'
+      schema:
+        type: string
+        example: adasdas-dwqd3-fcsd-dwedd
     ResourceId:
       required: true
       description: Id of the resource to be worked on
@@ -479,7 +511,6 @@ components:
           type: string
           example: aaas-ssss-dddd-dddd
         required:
-          - pariwarId
           - role 
           - CustomerId   
     Pariwar:
