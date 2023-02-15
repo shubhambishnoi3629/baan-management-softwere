@@ -208,6 +208,143 @@ paths:
         "200":
           description: ok
 
+  /pariwar:
+    get:
+      tags:
+        - pariwar
+      operationId: getListPariwar
+      summary: to get all pariwar
+      responses:
+        '200':
+          description: List of pariwar
+          content:
+            application/json; chartset=utf-8:
+              schema:
+                $ref:
+    post:
+      tags:
+        - pariwar
+      operationId: createPariwar
+      summary: to create pariwar
+      requestBody:
+        content:
+          application/json; charset=utf-8:
+            schema:
+              $ref: 
+      responses:
+        "200":
+          description: New created pariwar object
+          content:
+            applocation/json; charset=utf-8:
+              schema:
+                $ref: 
+  /pariwar/{id}:
+    put:
+      tags:
+        - pariwar
+      operationId: updatePariwarId
+      summary: to update pariwar
+      requestBody:
+        content:
+          application/json; charset=utf-8:
+            schema:
+              $ref: 
+      responses:
+        '200':
+          description:  Update pariwar
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref:       
+    delete:
+      tags:
+        - pariwar
+      operationId: deletePariwarById
+      summary: to delete pariwar by id
+      responses:
+        '200':
+          description: ok
+  /pariwar/:id/:roles:
+    parameters:
+      - $ref: 
+    get:
+      parameters:
+        - $ref: 
+      tags:
+        - roles
+      operationId: roles in pariwar
+      summary: roles in pariwar
+      responses:
+        '200':
+          description: Get role
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: ''
+  /pariwar/:pariwarId/nimta:
+    get:
+      tags:
+        - Nimta
+      operationId: getNimtaList
+      summary: to get a list of all nimta
+    post:
+      tags:
+        - Nimta
+      operationId:  createNimta  
+      summary:  to create a nimta
+  /pariwar/:pariwarId/nimta/:id:
+    put:
+      tags:
+        - Nimta
+      operationId: updateNimta
+      summary: to update a nimta
+    delete:
+      tags:
+        - Nimta
+      operationId: deleteNimta
+      summary: to delete a nimta
+  /pariwar/:pariwarId/nimta/:id/addRelatives:
+    post:
+      tags:
+        - Nimta
+      operationId: addRelatives
+      summary: to add relatives in nimta
+  /pariwar/:pariwarId/relative:
+    get:
+      tags:
+        - Relative
+      operationId: getrelativeList
+      summary: to get relative
+      responses:
+        '200'
+    post:
+      tags:
+        - Relative
+      operationId:  createrelative
+      summary:   to create a relative
+  /pariwar/pariwarId/relative/{id}:
+    put:
+      tags:
+        - Relative
+      operationId: updaterelative  
+      summary: to update relative
+    delete:
+      tags:
+        - Relative
+      operationId: deleterelative
+      summary: to delete relative
+/search:
+    get:
+      tags:
+        - Customer
+      operationId: getCustomer
+      summary: to find a customer   
+    post:
+      tags:
+        - customer
+      operationId: createCustomer
+      summary: to create a customer            
+
 components:
   parameters:
     ResourceId:
@@ -269,6 +406,144 @@ components:
         type: number
         example: 1
   schemas:
+    PariwarBase:
+      type: object
+      properties:
+        name:
+          type: string
+          example: shubham
+        required:
+          - name
+        
+      additionalProperties: false
+    RelativesBase:
+      type: object
+      additionalProperties: false
+      properties:
+        firstName:
+          type: string
+          example: shubham
+        lastName:
+          type: string
+          example: godara  
+        fathersName:
+          type: string
+          example: bhagwan dass
+        address:
+          type: string
+          example: mp rohi
+        nickName:
+          type: string
+          example: gholio 
+        phoneNumber:
+          type: number
+          example: 12345 
+        details:
+          type: string
+          example: mp rohi
+        asignTo:
+          type: string
+          example: gholio 
+      required:
+        -  firstName
+        -  lastName 
+        -  fathersName
+        -  address
+        -  nickName
+        -  phoneNumber
+        -  details
+        -  asignTo
+    NimtaBase:
+      type: object 
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          example: shubham
+        relatives:
+          type: array
+          items:
+            type: string
+            example: aaaa-bbbb-cccc-dddd
+        required:
+          - name
+          - relatives
+    PariwarRoleBase:
+      type: object
+      additionalProperties: false
+      properties:
+        role:
+          type: string
+          example: brother
+        customerId:
+          type: string
+          example: aaas-ssss-dddd-dddd
+        required:
+          - pariwarId
+          - role 
+          - CustomerId   
+    Pariwar:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: '#/components/schemas/PariwarBase'
+      properties:
+        _id:
+          type: string
+          example: aaas-ssss-dddd-dddd
+        pariwarId:
+          type: string
+          example: aaaa-bbbb-cccc-dddd
+      required:
+        - _id
+        - pariwarId
+    Relatives:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: '#/components/schemas/RelativeBase'
+      properties:
+        _id:
+          type: string
+          example: aaas-ssss-dddd-dddd
+        pariwarId:
+          type: string
+          example: aaaa-bbbb-cccc-dddd
+      required:
+        - _id
+        - pariwarId
+    PariwarRole:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: '#/components/schemas/PariwarRoleBase'
+      properties:
+        _id:
+          type: string
+          example: aaas-ssss-dddd-dddd
+        pariwarId:
+          type: string
+          example: aaaa-bbbb-cccc-dddd
+      required:
+        - _id
+        - pariwarId
+    PariwarList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Pariwar'
+    RelativesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Relatives'
+    PariwarRoleList:
+      type: array
+      items:
+        - $ref: '#/components/schemas/PariwarRole'
+    CustomerList:
+      type: array
+      items:
+        - $ref: '#/components/schemas/CustomerBase'
+
     CustomerBase:
       type: object
       properties:
@@ -391,8 +666,6 @@ components:
         - bhaaiId
       additionalProperties: false
     GiveBaan:
-      
-      
       type: object
       properties:
         baanId:
