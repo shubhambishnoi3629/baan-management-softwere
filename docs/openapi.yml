@@ -211,7 +211,7 @@ paths:
   /pariwar:
     get:
       tags:
-        - pariwar
+        - Pariwar
       operationId: getListPariwar
       summary: to get all pariwar
       responses:
@@ -220,60 +220,58 @@ paths:
           content:
             application/json; chartset=utf-8:
               schema:
-                - $ref: '#/components/schemas/PariwarList'
+                $ref: '#/components/schemas/PariwarList'
     post:
       tags:
-        - pariwar
+        - Pariwar
       operationId: createPariwar
       summary: to create pariwar
       requestBody:
         content:
           application/json; charset=utf-8:
             schema:
-              - $ref:  '#/components/schemas/PariwarBase'
+              $ref:  '#/components/schemas/PariwarBase'
       responses:
         "200":
           description: New created pariwar object
           content:
             applocation/json; charset=utf-8:
               schema:
-                - $ref: '#/components/schemas/PariwarList'
+                $ref: '#/components/schemas/PariwarList'
   /pariwar/{id}:
     parameters:
-      - $ref: '#/components/schemas/ResourceId'
+      - $ref: '#/components/parameters/ResourceId'
     put:
       tags:
-        - pariwar
+        - Pariwar
       operationId: updatePariwarId
       summary: to update pariwar
       requestBody:
         content:
           application/json; charset=utf-8:
             schema:
-              - $ref: '#/components/schemas/PariwarBase'
+              $ref: '#/components/schemas/PariwarBase'
       responses:
         '200':
           description:  Update pariwar object
           content:
             application/json; charset=utf-8:
               schema:
-                - $ref:'#/components/schemas/PariwarList'
+                $ref: '#/components/schemas/PariwarList'
     delete:
       tags:
-        - pariwar
+        - Pariwar
       operationId: deletePariwarById
       summary: to delete pariwar by id
       responses:
         '200':
           description: ok
-  /pariwar/{id}/roles:
+  /pariwar/{pariwarId}/roles:
     parameters:
       - $ref: '#/components/parameters/ResourceId'
     get:
-      parameters:
-        - $ref: 
       tags:
-        - roles
+        - PariwarRoles
       operationId: roles in pariwar
       summary: roles in pariwar
       responses:
@@ -282,24 +280,24 @@ paths:
           content:
             application/json; charset=utf-8:
               schema:
-                - $ref: '#/components/schemas/PariwarRoleBase'
+                $ref: '#/components/schemas/PariwarRoleList'
     post:
       tags:
-        - customer
+        - PariwarRoles 
       operationId: createCustomer
       summary: to create a customer 
       requestBody:
         content:
           application/json; charset=utf-8:
             schema:
-              - $ref: '#/components/schemas/PariwarRoleBase'
+              $ref: '#/components/schemas/PariwarRoleBase'
       responses:
         '200':
           description: create role
           content:
             application/json; charset=utf-8:
               schema:
-                - $ref: '#/components/schemas/PariwarRole'
+                $ref: '#/components/schemas/PariwarRole'
   /pariwar/{pariwarId}/nimta:
     parameters:
       - $ref: '#/components/parameters/PariwarId'
@@ -314,7 +312,7 @@ paths:
           content:
             application/json; charset=utf-8:
               schema:
-                - $ref: '#/components/schemas/NimtaList'
+                $ref: '#/components/schemas/NimtaList'
     post:
       tags:
         - Nimta
@@ -324,14 +322,14 @@ paths:
         content:
           application/json; charset=utf-8:
             schema:
-              - $ref: '#/components/schemas/NimtaBase'
+              $ref: '#/components/schemas/NimtaBase'
       responses:
         '200':
           description: create nimta
           content:
             application/json; charset=utf-8:
               schema:
-                - $ref: '#/components/schemas/Nimta'
+                $ref: '#/components/schemas/Nimta'
   /pariwar/{pariwarId}/nimta/{id}:
     parameters:
       - $ref: '#/components/parameters/PariwarId'
@@ -345,14 +343,14 @@ paths:
         content:
           application/json; charset=utf-8:
             schema:
-              - $ref: '#/components/schemas/NimtaBase'
+              $ref: '#/components/schemas/NimtaBase'
       responses:
         '200':
           description: update nimta
           content:
             application/json; charset=utf-8:
               schema:
-                - $ref: '#/components/schemas/Nimta'
+                $ref: '#/components/schemas/Nimta'
     delete:
       tags:
         - Nimta
@@ -374,7 +372,7 @@ paths:
         content:
           application/json; charset=utf-8:
             schema:
-              - $ref: '#/components/schemas/Addrelatives'
+              $ref: '#/components/schemas/AddRelatives'
       responses:
         '200':
           description: ok
@@ -392,7 +390,7 @@ paths:
           content:
             application/json; charset=utf-8:
               schema:
-                - $ref: '#/components/schemas/RelativeList'
+                $ref: '#/components/schemas/RelativeList'
     post:
       tags:
         - Relative
@@ -402,14 +400,14 @@ paths:
         content:
           application/json; charset=utf-8:
             schema:
-              - $ref: '#/components/schemas/RelativeBase'
+              $ref: '#/components/schemas/RelativeBase'
       responses:
         '200':
           description: create relative
           content:
             application/json; charset=utf-8:
               schema:
-                - $ref: '#/components/schemas/Relative'
+                $ref: '#/components/schemas/Relative'
   /pariwar/{pariwarId}/relative/{id}:
     parameters:
       - $ref: '#/components/parameters/PariwarId'
@@ -423,14 +421,14 @@ paths:
         content:
           application/json; charset=utf-8:
             schema:
-              - $ref: '#/components/schemas/RelativeBase'
+              $ref: '#/components/schemas/RelativeBase'
       responses:
         '200':
           description: update relative
           content:
             application/json; charset=utf-8:
               schema:
-                - $ref: '#/components/schemas/Relative'
+                $ref: '#/components/schemas/Relative'
     delete:
       tags:
         - Relative
@@ -439,21 +437,21 @@ paths:
       responses:
         '200':
           description: ok
-/search:
-  parameters:
-    - $ref: '#/components/parameters/Email'
-  get:
-    tags:
-      - Customer
-    operationId: getCustomer
-    summary: to find a customer
-    responses:
-      '200':
-        description: Get customer
-        content:
-          application/json; charset=utf-8:
-            schema:
-              - $ref: '#/components/schemas/CustomerList'              
+  /customer:
+    parameters:
+      - $ref: '#/components/parameters/Email'
+    get:
+      tags:
+        - Customer
+      operationId: getCustomer
+      summary: to find a customer
+      responses:
+        '200':
+          description: Get customer
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/CustomerList'              
 
 components:
   parameters:
@@ -465,10 +463,10 @@ components:
         type: string
         example: godara64022@gmail.com
     PariwarId:
-      requried: true
+      required: true
       description: id of pariwar to be worked on 
       in: path 
-      name: 'id'
+      name: 'pariwarId'
       schema:
         type: string
         example: adasdas-dwqd3-fcsd-dwedd
@@ -544,9 +542,9 @@ components:
           items:
             type: string
             example: aaaa-bbbb-cccc-dddd
-        required:
-          - relativeIds
-          - baanIds
+      required:
+        - relativeIds
+        - baanIds
       additionalProperties: false
 
     PariwarBase:
@@ -555,10 +553,10 @@ components:
         name:
           type: string
           example: shubham
-        required:
-          - name
+      required:
+        - name
       additionalProperties: false
-    RelativesBase:
+    RelativeBase:
       type: object
       additionalProperties: false
       properties:
@@ -607,9 +605,9 @@ components:
           items:
             type: string
             example: aaaa-bbbb-cccc-dddd
-        required:
-          - name
-          - relatives
+      required:
+        - name
+        - relatives
     PariwarRoleBase:
       type: object
       additionalProperties: false
@@ -620,9 +618,9 @@ components:
         customerId:
           type: string
           example: aaas-ssss-dddd-dddd
-        required:
-          - role 
-          - CustomerId   
+      required:
+        - role 
+        - CustomerId   
     Pariwar:
       type: object
       additionalProperties: false
@@ -637,8 +635,23 @@ components:
           example: aaaa-bbbb-cccc-dddd
       required:
         - _id
+        - pariwarId 
+    Nimta:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: '#/components/schemas/NimtaBase'
+      properties:
+        _id:
+          type: string
+          example: aaas-ssss-dddd-dddd
+        pariwarId:
+          type: string
+          example: aaaa-bbbb-cccc-dddd
+      required:
+        - _id
         - pariwarId
-    Relatives:
+    Relative:
       type: object
       additionalProperties: false
       allOf:
@@ -671,23 +684,23 @@ components:
     PariwarList:
       type: array
       items:
-        - $ref: '#/components/schemas/Pariwar'
-    RelativesList:
+        $ref: '#/components/schemas/Pariwar'
+    RelativeList:
       type: array
       items:
-        - $ref: '#/components/schemas/Relatives'
+        $ref: '#/components/schemas/Relative'
     PariwarRoleList:
       type: array
       items:
-        - $ref: '#/components/schemas/PariwarRole'
+        $ref: '#/components/schemas/PariwarRole'
     CustomerList:
       type: array
       items:
-        - $ref: '#/components/schemas/CustomerBase'
+        $ref: '#/components/schemas/CustomerBase'
     NimtaList:
       type: array
-      item: 
-        - $ref: '#/components/schemas/NimtaBase'
+      items: 
+        $ref: '#/components/schemas/NimtaBase'
 
     CustomerBase:
       type: object

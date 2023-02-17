@@ -16,6 +16,14 @@ const customerSchema = new mongoose.Schema({
     match: /.+\@.+\..+/,
     unique: true
   },
+  phoneNumber: {
+    required: true,
+    type: Number
+  },
+  pariwarRelatives: [{
+    required: true,
+    type: Array
+  }],
 });
 
 export const CustomerModel = mongoose.model('Customer', customerSchema);

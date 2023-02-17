@@ -4,8 +4,16 @@ import { authRouter } from './authRouter.js';
 import { BaanController } from '../controllers/baanController.js';
 import { BhaaiController } from '../controllers/bhaaiController.js';
 import { handelError } from '../utils/errorHandler.js';
+import { pariwarRolesRouter} from './pariwarRoleRouter.js';
+import { pariwarRouter } from './pariwarRouter.js';
+import { nimtaRouter } from './nimtaRouter.js';
+import { relativesRouter } from './relativesRouter.js';
 
 const router = Router();
+
+router.use('/pariwar', pariwarRouter );
+
+router.use('/pariwarRoles', pariwarRolesRouter );
 
 router.use('/bhaai', bhaaiRouter);
 

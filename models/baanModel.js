@@ -40,4 +40,4 @@ const baanSchema = new mongoose.Schema({
   }
 });
 
-export const BaanModel = mongoose.model('Baan', baanSchema);
+export const BaanModel = mongoose.model('baan', baanSchema);

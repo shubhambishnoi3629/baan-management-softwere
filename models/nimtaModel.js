@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { v4 } from 'uuid';
 
-const pariwarSchema = new mongoose.Schema({
+const nimtaSchema = new mongoose.Schema({
   _id: {
     type: String,
     default: () => v4(), 
@@ -20,4 +20,4 @@ const pariwarSchema = new mongoose.Schema({
   },
 });  
 
-export const PariwarModel = mongoose.model('pariwar', pariwarSchema);  
+export const NimtaModel = mongoose.model('nimta', nimtaSchema);  
