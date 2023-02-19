@@ -43,6 +43,8 @@ paths:
                 $ref: '#/components/schemas/Customer'
   /bhaai:
     get:
+      security:
+        - JWT: [ ]
       tags:
         - Bhaai
       operationId: getListBhaai
@@ -55,6 +57,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/BhaaiList'
     post:
+      security:
+        - JWT: [ ]
       tags:
         - Bhaai
       operationId: createBhaai
@@ -75,6 +79,8 @@ paths:
     parameters:
       - $ref: '#/components/parameters/ResourceId'
     get:
+      security:
+        - JWT: [ ]
       parameters:
         - $ref: '#/components/parameters/Total'
       tags:
@@ -89,6 +95,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/BhaaiTotal'
     put:
+      security:
+        - JWT: [ ]
       tags:
         - Bhaai
       operationId: updateBhaaiId
@@ -106,6 +114,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Bhaai'      
     delete:
+      security:
+        - JWT: [ ]
       tags:
         - Bhaai
       operationId: deleteBhaaiById
@@ -117,6 +127,8 @@ paths:
     parameters:
       - $ref: '#/components/parameters/BhaaiId'
     get:
+      security:
+        - JWT: [ ]
       tags:
         - Baan
       operationId: getBaan
@@ -129,6 +141,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/BaanList'
     post:
+      security:
+        - JWT: [ ]
       tags:
         - Baan
       operationId: createBaan 
@@ -150,6 +164,8 @@ paths:
       - $ref: '#/components/parameters/BhaaiId'
       - $ref: '#/components/parameters/ResourceId'
     put:
+      security:
+        - JWT: [ ]
       tags:
         - Baan
       operationId: updateBaanById
@@ -167,6 +183,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Baan'   
     delete:
+      security:
+        - JWT: [ ]
       tags:
         - Baan
       operationId: deleteBaanById
@@ -176,12 +194,10 @@ paths:
           description: ok
   /search:
     parameters:
-      - $ref: '#/components/parameters/FirstName'
-      - $ref: '#/components/parameters/LastName'
-      - $ref: '#/components/parameters/FathersName'
-      - $ref: '#/components/parameters/Address'
-      - $ref: '#/components/parameters/NickName'
+      - $ref: '#/components/parameters/SearchBy'
     get:
+      security:
+        - JWT: [ ]
       tags:
         - Baan
       operationId: searchBaan
@@ -195,6 +211,8 @@ paths:
                 $ref: '#/components/schemas/BaanList'
   /giveBaan:
     post:
+      security:
+        - JWT: [ ]
       tags:
         - Baan
       operationId: giveBaan
@@ -210,6 +228,8 @@ paths:
 
   /pariwar:
     get:
+      security:
+        - JWT: [ ]
       tags:
         - Pariwar
       operationId: getListPariwar
@@ -222,6 +242,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PariwarList'
     post:
+      security:
+        - JWT: [ ]
       tags:
         - Pariwar
       operationId: createPariwar
@@ -242,6 +264,8 @@ paths:
     parameters:
       - $ref: '#/components/parameters/ResourceId'
     put:
+      security:
+        - JWT: [ ]
       tags:
         - Pariwar
       operationId: updatePariwarId
@@ -259,6 +283,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PariwarList'
     delete:
+      security:
+        - JWT: [ ]
       tags:
         - Pariwar
       operationId: deletePariwarById
@@ -270,6 +296,8 @@ paths:
     parameters:
       - $ref: '#/components/parameters/ResourceId'
     get:
+      security:
+        - JWT: [ ]
       tags:
         - PariwarRoles
       operationId: roles in pariwar
@@ -282,6 +310,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PariwarRoleList'
     post:
+      security:
+        - JWT: [ ]
       tags:
         - PariwarRoles 
       operationId: createCustomer
@@ -302,6 +332,8 @@ paths:
     parameters:
       - $ref: '#/components/parameters/PariwarId'
     get:
+      security:
+        - JWT: [ ]
       tags:
         - Nimta
       operationId: getNimtaList
@@ -314,6 +346,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/NimtaList'
     post:
+      security:
+        - JWT: [ ]
       tags:
         - Nimta
       operationId:  createNimta  
@@ -335,6 +369,8 @@ paths:
       - $ref: '#/components/parameters/PariwarId'
       - $ref: '#/components/parameters/ResourceId'
     put:
+      security:
+        - JWT: [ ]
       tags:
         - Nimta
       operationId: updateNimta
@@ -352,6 +388,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Nimta'
     delete:
+      security:
+        - JWT: [ ]
       tags:
         - Nimta
       operationId: deleteNimta
@@ -364,6 +402,8 @@ paths:
       - $ref: '#/components/parameters/PariwarId'
       - $ref: '#/components/parameters/ResourceId'
     post:
+      security:
+        - JWT: [ ]
       tags:
         - Nimta
       operationId: addRelatives
@@ -380,6 +420,8 @@ paths:
     parameters:
       - $ref: '#/components/parameters/PariwarId'
     get:
+      security:
+        - JWT: [ ]
       tags:
         - Relative
       operationId: getrelativeList
@@ -392,6 +434,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/RelativeList'
     post:
+      security:
+        - JWT: [ ]
       tags:
         - Relative
       operationId:  createrelative
@@ -413,6 +457,8 @@ paths:
       - $ref: '#/components/parameters/PariwarId'
       - $ref: '#/components/parameters/ResourceId'
     put:
+      security:
+        - JWT: [ ]
       tags:
         - Relative
       operationId: updaterelative  
@@ -430,6 +476,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Relative'
     delete:
+      security:
+        - JWT: [ ]
       tags:
         - Relative
       operationId: deleterelative
@@ -455,6 +503,13 @@ paths:
 
 components:
   parameters:
+    SearchBy:
+      description: text for search
+      in: query
+      name: 'searchBy'
+      schema:
+        type: string
+        example: godara64022@gmail.com
     Email:
       description: email for search
       in: query
@@ -630,12 +685,8 @@ components:
         _id:
           type: string
           example: aaas-ssss-dddd-dddd
-        pariwarId:
-          type: string
-          example: aaaa-bbbb-cccc-dddd
       required:
         - _id
-        - pariwarId 
     Nimta:
       type: object
       additionalProperties: false
@@ -708,6 +759,9 @@ components:
         email:
           type: string
           example: rahul@gmail.com
+        phoneNumber:
+          type: string
+          example: +919416061874
         password:
           type: string
           example: dksjfscsf
@@ -837,3 +891,9 @@ components:
         - baanId
         - amount
       additionalProperties: false
+  securitySchemes:
+    JWT:
+      bearerFormat: JWT
+      description: authantication
+      scheme: bearer
+      type: http

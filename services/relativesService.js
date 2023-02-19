@@ -1,24 +1,24 @@
-import { RelativesModel } from "../models/relativesModel.js";
-
 export class RelativesService {
-  
-  constructor() { };
+  relativesModel
+  constructor(relativesModel) {
+    this.relativesModel = relativesModel
+   };
 
   async getAll(pariwarId, customerId) {
-    return RelativesModel.find({
+    return this.relativesModel.find({
       pariwarId: pariwarId,
       customerId,
     });
   }
 
   async createRelatives(data) {
-    const relatives = await RelativesModel.create(data);
+    const relatives = await this.relativesModel.create(data);
 
     return relatives;
   }
 
   async updateRelativesById(id, data, customerId) {
-    const relatives = await RelativesModel.findOneAndUpdate(
+    const relatives = await this.relativesModel.findOneAndUpdate(
       { 
         _id: id,
         customerId,
@@ -35,7 +35,7 @@ export class RelativesService {
   }
 
   async deleteRelativesById(id, customerId) {
-    return RelativesModel.deleteOne({
+    return this.relativesModel.deleteOne({
       id: id,
       customerId,
     });

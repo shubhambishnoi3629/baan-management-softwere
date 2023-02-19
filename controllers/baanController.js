@@ -40,8 +40,8 @@ export class BaanController {
 
   static async searchBaan (req, res) {
     const customer = jwtAuthentication.verifyToken(req);
-    const serachBy = req.query;
-    const baanList = await baanService.search(customer._id, serachBy);
+    const searchBy = req.query.searchBy;
+    const baanList = await baanService.search(customer._id, searchBy);
     
     res.send(baanList);
   }

@@ -1,25 +1,31 @@
-import { BaanModel } from "../models/baanModel.js";
-
 export class BaanService {
-  
-  constructor() { };
+   baanModel;
+  constructor(baanModel) {
+    this.baanModel = baanModel;
+   };
 
   async getAll(bhaaiId, customerId) {
-    return BaanModel.find({
+    return this.baanModel.find({
       bhaaiId: bhaaiId,
       customerId,
     });
   }
 
   async search(customerId, searchBy) {
-    return BaanModel.find({
-      ...searchBy,
+    return this.baanModel.find({
+      $or: [
+        { firstName: { $regex: searchBy, $options: 'i' }}, 
+        { lastName: { $regex: searchBy, $options: 'i' }} ,
+        { nickName: { $regex: searchBy, $options: 'i' }}, 
+        { fathersName: { $regex: searchBy, $options: 'i' }},
+        { address: { $regex: searchBy, $options: 'i' }}
+      ],
       customerId,
     });
   }
 
   async getTotalAmount(bhaaiId, customerId) {
-    const agg =  (await BaanModel.aggregate([
+    const agg =  (await this.baanModel.aggregate([
       { 
         $match: {
           bhaaiId,
@@ -40,20 +46,20 @@ export class BaanService {
   }
 
   async getBaanById(id, customerId) {
-    return BaanModel.findOne({
+    return this.baanModel.findOne({
       _id: id,
       customerId,
     });
   }
 
   async createBaan(data) {
-    const baan = await BaanModel.create(data);
+    const baan = await this.baanModel.create(data);
 
     return baan;
   }
 
   async updateBaanById(id, data, customerId) {
-    const baan = await BaanModel.findOneAndUpdate(
+    const baan = await this.baanModel.findOneAndUpdate(
       { 
         _id: id,
         customerId,
@@ -70,9 +76,15 @@ export class BaanService {
   }
 
   async deleteBaanById(id, customerId) {
-    return BaanModel.deleteOne({
+    return this.baanModel.deleteOne({
       id: id,
       customerId,
     });
   }
+
+  async deleteAllBaanByBhaaiId(bhaaiId) {
+    return this.baanModel.deleteMany( {
+      bhaaiId,
+    })
+ }
 }

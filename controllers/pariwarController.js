@@ -11,10 +11,10 @@ export class PariwarController {
   }
 
   static async createPariwar (req, res) {
-    //const customer = jwtAuthentication.verifyToken(req);  
+    const customer = jwtAuthentication.verifyToken(req);  
     const pariwar = await pariwarService.createPariwar({
       ...req.body,
-     // customerId: customer._id,
+     customerId: customer._id,
     });
 
     res.send(pariwar);

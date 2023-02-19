@@ -1,24 +1,24 @@
-import { CustomerModel } from "../models/customerModel.js";
-
 export class CustomerService {
-  
-  constructor() { };
+  customerModel
+  constructor(customerModel) {
+    this.customerModel = customerModel;
+   };
 
   async createCustomer(data) {
-    let customer = await CustomerModel.findOne({
+    let customer = await this.customerModel.findOne({
       email: data.email,
     });
     if (customer) {
       throw  { message: "email is already in use." };
     }
 
-    customer = await CustomerModel.create(data);
+    customer = await this.customerModel.create(data);
 
     return customer;
   }
 
   async login(email, password) {
-    return CustomerModel.findOne({
+    return this.customerModel.findOne({
       email: email,
       password: password,
     });

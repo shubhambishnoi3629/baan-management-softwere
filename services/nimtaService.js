@@ -1,24 +1,25 @@
-import { NimtaModel } from "../models/nimtaModel.js";
-
-export class NimtaService {
+export class NimtaService { 
+   nimtaModel;
   
-  constructor() { };
+  constructor(nimtaModel) {
+    this.nimtaModel = nimtaModel
+   };
 
   async getNimta(pariwarId, customerId) {
-    return NimtaModel.find({
+    return  this.nimtaModel.find({
       pariwarId: pariwarId,
       customerId,
     });
   }
 
   async createNimta(data) {
-    const nimta = await NimtaModel.create(data);
+    const nimta = await  this.nimtaModel.create(data);
 
     return nimta;
   }
 
   async updateNimtaById(id, data, customerId) {
-    const nimta = await NimtaModel.findOneAndUpdate(
+    const nimta = await  this.nimtaModel.findOneAndUpdate(
       { 
         _id: id,
         customerId,
@@ -35,7 +36,7 @@ export class NimtaService {
   }
 
   async deleteNimtaById(id, customerId) {
-    return NimtaModel.deleteOne({
+    return  this.nimtaModel.deleteOne({
       id: id,
       customerId,
     });

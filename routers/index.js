@@ -6,7 +6,6 @@ import { BhaaiController } from '../controllers/bhaaiController.js';
 import { handelError } from '../utils/errorHandler.js';
 import { pariwarRolesRouter} from './pariwarRoleRouter.js';
 import { pariwarRouter } from './pariwarRouter.js';
-import { nimtaRouter } from './nimtaRouter.js';
 import { relativesRouter } from './relativesRouter.js';
 
 const router = Router();

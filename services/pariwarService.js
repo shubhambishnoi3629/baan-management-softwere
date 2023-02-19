@@ -1,23 +1,23 @@
-import { PariwarModel } from "../models/pariwarModel.js";
-
 export class PariwarService {
-  
-  constructor() { };
+  pariwarModel
+  constructor(pariwarModel) {
+    this.pariwarModel = pariwarModel
+   };
 
   async getPariwar(customerId) {
-    return PariwarModel.find({
+    return this.pariwarModel.find({
       customerId: customerId,
     });
   }
 
   async createPariwar(data) {
-    const pariwar = await PariwarModel.create(data);
+    const pariwar = await this.pariwarModel.create(data );
 
     return pariwar;
   }
 
   async updatePariwarById(id, data) {
-    const pariwar = await PariwarModel.findOneAndUpdate(
+    const pariwar = await this.pariwarModel.findOneAndUpdate(
       { _id: id,
      
       },
@@ -33,7 +33,7 @@ export class PariwarService {
   }
 
   async deletePariwarById(id) {
-    return PariwarModel.deleteOne({
+    return this.pariwarModel.deleteOne({
       _id: id,
     });
   }
