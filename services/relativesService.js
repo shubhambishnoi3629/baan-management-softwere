@@ -40,4 +40,24 @@ export class RelativesService {
       customerId,
     });
   }
+
+  async createRelativesByBaans(baans, pariwarId, customerId) {
+    const data = baans.map(
+      (baan) => {
+        return {
+          firstName: baan.firstName,
+          lastName: baan.lastName,
+          fathersName: baan.fatherName,
+          address: baan.address,
+          nickName: baan.nickName,
+          pariwarId,
+          customerId,
+        };
+      }
+    );
+
+    const relatives = await this.relativesModel.create(data);
+
+    return relatives;
+  }
 }

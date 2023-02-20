@@ -4,7 +4,7 @@ import { jwtAuthentication } from "../utils/jwt.js";
 export class PariwarController {
 
   static async getPariwar(req, res) {
-   // const customer = jwtAuthentication.verifyToken(req);  
+    const customer = jwtAuthentication.verifyToken(req);  
     const pariwar = await pariwarService.getPariwar(customer._id);
 
     res.send(pariwar);
@@ -14,7 +14,7 @@ export class PariwarController {
     const customer = jwtAuthentication.verifyToken(req);  
     const pariwar = await pariwarService.createPariwar({
       ...req.body,
-     customerId: customer._id,
+      customerId: customer._id,
     });
 
     res.send(pariwar);

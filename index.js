@@ -18,6 +18,7 @@ database.init();
 
 const swaggerDocument = YAML.load("./docs/openapi.yml");
 app.use('/api-docs', swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerDocument));
+
 app.use('/api', appRouter);
 
 app.use((req, res, next) => {

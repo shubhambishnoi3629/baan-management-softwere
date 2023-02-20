@@ -12,11 +12,7 @@ const nimtaSchema = new mongoose.Schema({
   },
   relatives: {
     required: true,
-    type: String
-  }, 
-  pariwarId: {
-    required: true,
-    type: String
+    type: Array
   },
 });  
 

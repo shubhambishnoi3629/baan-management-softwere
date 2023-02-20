@@ -87,4 +87,13 @@ export class BaanService {
       bhaaiId,
     })
  }
+ 
+ async getBaanByIds(Ids, customerId) {
+  return this.baanModel.find({
+    _id: {
+      $in: Ids
+    },
+    customerId,
+  });
+}
 }

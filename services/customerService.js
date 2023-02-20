@@ -22,5 +22,12 @@ export class CustomerService {
       email: email,
       password: password,
     });
-  };
+  }
+
+  async search(searchFrom){
+    console.log(searchFrom)
+    return this.customerModel.find({
+      email: { $regex: searchFrom, $options: 'i' },
+    });
+  }
 };  

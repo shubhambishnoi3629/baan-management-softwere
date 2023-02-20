@@ -211,8 +211,6 @@ paths:
                 $ref: '#/components/schemas/BaanList'
   /giveBaan:
     post:
-      security:
-        - JWT: [ ]
       tags:
         - Baan
       operationId: giveBaan
@@ -294,7 +292,7 @@ paths:
           description: ok
   /pariwar/{pariwarId}/roles:
     parameters:
-      - $ref: '#/components/parameters/ResourceId'
+      - $ref: '#/components/parameters/pariwarId'
     get:
       security:
         - JWT: [ ]
@@ -489,6 +487,8 @@ paths:
     parameters:
       - $ref: '#/components/parameters/Email'
     get:
+      security:
+        - JWT: [ ]
       tags:
         - Customer
       operationId: getCustomer
@@ -636,7 +636,7 @@ components:
         details:
           type: string
           example: mp rohi
-        asignTo:
+        assignTo:
           type: string
           example: gholio 
       required:
@@ -647,7 +647,7 @@ components:
         -  nickName
         -  phoneNumber
         -  details
-        -  asignTo
+        -  assignTo
     NimtaBase:
       type: object 
       additionalProperties: false
@@ -659,7 +659,7 @@ components:
           type: array
           items:
             type: string
-            example: aaaa-bbbb-cccc-dddd
+            example: brother
       required:
         - name
         - relatives
@@ -696,12 +696,8 @@ components:
         _id:
           type: string
           example: aaas-ssss-dddd-dddd
-        pariwarId:
-          type: string
-          example: aaaa-bbbb-cccc-dddd
       required:
         - _id
-        - pariwarId
     Relative:
       type: object
       additionalProperties: false

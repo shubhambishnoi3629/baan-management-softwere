@@ -17,7 +17,7 @@ export class RelativesController {
     const customer = jwtAuthentication.verifyToken(req);  
     const relatives = await relativesService.createRelatives({
       ...req.body,
-      relativesId: req.params.relativesiId,
+      pariwarId: req.params.pariwarId,
       customerId: customer._id,
     });
 
