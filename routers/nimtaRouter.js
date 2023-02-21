@@ -13,6 +13,6 @@ router.put('/:id', handelError(NimtaController.updateNimtaById));
 
 router.delete('/:id', handelError(NimtaController.deleteNimtaById));
 
-router.post('/:id/addRelatives', handelError(NimtaController.addRelativesByIds)); 
+router.post('/:id/addRelative', handelError(NimtaController.addRelativeByIds)); 
 
 export const nimtaRouter = router;

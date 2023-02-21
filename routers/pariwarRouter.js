@@ -3,7 +3,7 @@ import { PariwarController } from "../controllers/pariwarController.js";
 import { handelError } from "../utils/errorHandler.js";
 import { nimtaRouter } from './nimtaRouter.js';
 import { pariwarRolesRouter} from './pariwarRoleRouter.js';
-import { relativesRouter } from './relativesRouter.js';
+import { relativeRouter } from './relativeRouter.js';
 
 const router = Router();
 
@@ -19,6 +19,6 @@ router.use('/:pariwarId/nimta', nimtaRouter);
 
 router.use('/:pariwarId/pariwarRoles', pariwarRolesRouter );
 
-router.use('/:pariwarId/relative', relativesRouter);
+router.use('/:pariwarId/relative', relativeRouter);
 
 export const pariwarRouter = router;

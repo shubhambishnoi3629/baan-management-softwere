@@ -395,7 +395,7 @@ paths:
       responses:
         '200':
           description: ok
-  /pariwar/{pariwarId}/nimta/{id}/addRelatives:
+  /pariwar/{pariwarId}/nimta/{id}/addRelative:
     parameters:
       - $ref: '#/components/parameters/PariwarId'
       - $ref: '#/components/parameters/ResourceId'
@@ -404,13 +404,13 @@ paths:
         - JWT: [ ]
       tags:
         - Nimta
-      operationId: addRelatives
-      summary: to add relatives in nimta
+      operationId: addRelative
+      summary: to add relative in nimta
       requestBody:
         content:
           application/json; charset=utf-8:
             schema:
-              $ref: '#/components/schemas/AddRelatives'
+              $ref: '#/components/schemas/AddRelative'
       responses:
         '200':
           description: ok
@@ -584,7 +584,7 @@ components:
         type: number
         example: 1
   schemas:
-    AddRelatives:
+    AddRelative:
       type: object
       properties:
         relativeIds:
@@ -655,14 +655,14 @@ components:
         name:
           type: string
           example: shubham
-        relatives:
+        relative:
           type: array
           items:
             type: string
             example: brother
       required:
         - name
-        - relatives
+        - relative
     PariwarRoleBase:
       type: object
       additionalProperties: false

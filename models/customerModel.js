@@ -20,7 +20,7 @@ const customerSchema = new mongoose.Schema({
     required: true,
     type: Number
   },
-  pariwarRelatives: [{
+  pariwarRelative: [{
     required: true,
     type: Array
   }],

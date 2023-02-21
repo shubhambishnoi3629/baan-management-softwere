@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { v4 } from 'uuid';
 
-const relativesSchema = new mongoose.Schema({
+const relativeSchema = new mongoose.Schema({
   _id: {
     type: String,
     default: () => v4(), 
@@ -44,4 +44,4 @@ const relativesSchema = new mongoose.Schema({
   },
 });
 
-export const RelativesModel = mongoose.model('relatives', relativesSchema);
+export const RelativeModel = mongoose.model('relative', relativeSchema);

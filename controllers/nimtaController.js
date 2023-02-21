@@ -1,4 +1,4 @@
-import { nimtaService, relativesService } from "../services/index.js";
+import { nimtaService, relativeService } from "../services/index.js";
 import { jwtAuthentication } from "../utils/jwt.js";
 import { baanService } from "../services/index.js";
 
@@ -39,18 +39,18 @@ export class NimtaController {
     res.send({ success: true });
   }
 
-  static async addRelativesByIds(req,res) {
+  static async addRelativeByIds(req,res) {
     const customer = jwtAuthentication.verifyToken(req); 
     const relativeIds = req.body.relativeIds;
     const baanIds = req.body.baanIds;
     const baans = await baanService.getBaanByIds(baanIds);
-    const newRelatives = await relativesService.createRelativesByBaans(baans, req.params.pariwarId, customer._id);
+    const newRelative = await relativeService.createRelativeByBaans(baans, req.params.pariwarId, customer._id);
 
-    newRelatives.forEach(relative => {
+    newRelative.forEach(relative => {
       relativeIds.push(relative._id);
     });
 
-    const nimta = await nimtaService.addRelativesById(req.params.id, relativeIds);
+    const nimta = await nimtaService.addRelativeById(req.params.id, relativeIds);
 
     res.send(nimta);
 

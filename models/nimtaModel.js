@@ -10,7 +10,7 @@ const nimtaSchema = new mongoose.Schema({
     required: true,
     type: String
   },
-  relatives: {
+  relative: {
     required: true,
     type: Array
   },
