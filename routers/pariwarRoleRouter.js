@@ -8,6 +8,10 @@ router.get('/', handelError(PariwarRolesController.getPariwarRoles));
 
 router.post('/', handelError(PariwarRolesController.createPariwarRoles));
 
+router.put('/:id', handelError(PariwarRolesController.updatePariwarRole));
+
+router.delete('/:id', handelError(PariwarRolesController.deletePariwarRole));
+
 
 
 export const pariwarRolesRouter = router;

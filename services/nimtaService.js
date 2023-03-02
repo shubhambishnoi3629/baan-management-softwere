@@ -41,6 +41,8 @@ export class NimtaService {
       customerId,
     });
   }
+
+
   async addRelativeById(id, Ids) {
     const relative = await  this.nimtaModel.findOneAndUpdate(
       { 

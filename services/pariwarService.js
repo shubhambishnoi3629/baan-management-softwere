@@ -1,7 +1,9 @@
 export class PariwarService {
-  pariwarModel
-  constructor(pariwarModel) {
-    this.pariwarModel = pariwarModel
+  pariwarModel;
+  pariwarRoleService;
+  constructor(pariwarModel, pariwarRoleService) {
+    this.pariwarModel = pariwarModel;
+    this.pariwarRoleService = pariwarRoleService;
    };
 
   async getPariwar(customerId) {
@@ -9,9 +11,14 @@ export class PariwarService {
       customerId: customerId,
     });
   }
-
-  async createPariwar(data) {
-    const pariwar = await this.pariwarModel.create(data );
+  
+  async createPariwar(data) {   
+    const pariwar = await this.pariwarModel.create(data);    
+    await this.pariwarRoleService.createPariwarRoles({
+      pariwarId: pariwar._id,      
+      role: 'ADMIN',
+      customerId: data.customerId,    
+    });
 
     return pariwar;
   }

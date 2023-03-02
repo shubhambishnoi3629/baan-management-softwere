@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 import { v4 } from 'uuid';
 
-const pariwarRolesSchema = new mongoose.Schema({
+export const pariwarRolesSchema = new mongoose.Schema({
   _id: {
     type: String,
     default: () => v4(), 
    },
-  roles: {
+  role: {
     required: true,
     type: String
   },

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { v4 } from 'uuid';
+import { pariwarRolesSchema } from './pariwarRolesModel.js';
 
 const customerSchema = new mongoose.Schema({
   _id: {
@@ -17,12 +18,12 @@ const customerSchema = new mongoose.Schema({
     unique: true
   },
   phoneNumber: {
-    required: true,
+    required: false,
     type: Number
   },
-  pariwarRelative: [{
+  pariwarRoles: [{
     required: true,
-    type: Array
+    type: pariwarRolesSchema
   }],
 });
 

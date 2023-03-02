@@ -1,7 +1,10 @@
 export class PariwarRolesService {
   pariwarRolesModel;
-  constructor(pariwarRolesModel) {
-    this.pariwarRolesModel = pariwarRolesModel
+  customerService;
+
+  constructor(pariwarRolesModel, customerService) {
+    this.pariwarRolesModel = pariwarRolesModel;
+    this.customerService = customerService;
    };
 
   async getPariwarRoles(pariwarId, customerId) {
@@ -12,8 +15,33 @@ export class PariwarRolesService {
   }
 
   async createPariwarRoles(data) {
-    const pariwarRoles = await this.pariwarRolesModel.create(data);
+    const pariwarRole = await this.pariwarRolesModel.create(data);
+    await this.customerService.addPariwarRolesInCustomer(pariwarRole.toJSON());
 
-    return pariwarRoles;
+    return pariwarRole;
+  }
+
+  async updatePariwarRole(id, data) {
+    const pariwarRole = await  this.pariwarRolesModel.findOneAndUpdate(
+      { 
+        _id: id,
+      },
+      {
+        $set: data
+      },
+      {
+        new: 1
+      }
+    );
+    await this.customerService.updatePariwarRolesInCustomer(pariwarRole.toJSON());
+
+    return pariwarRole;
+  }
+
+  async deletePariwarRole(id, customerId) {
+    return  this.pariwarRolesModel.deleteOne({
+      id: id,
+      customerId,
+    });
   }
 }

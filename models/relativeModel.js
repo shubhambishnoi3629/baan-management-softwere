@@ -31,11 +31,11 @@ const relativeSchema = new mongoose.Schema({
     type: String
   },
   details:{
-    required: true,
+    required: false,
     type: String
   },
   assignTo: {
-    required: true,
+    required: false,
     type: String    
   },
   pariwarId: {

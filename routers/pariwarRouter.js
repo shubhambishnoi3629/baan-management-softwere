@@ -17,7 +17,7 @@ router.delete('/:id', handelError(PariwarController.deletePariwarById));
 
 router.use('/:pariwarId/nimta', nimtaRouter);
 
-router.use('/:pariwarId/pariwarRoles', pariwarRolesRouter );
+router.use('/:pariwarId/roles', pariwarRolesRouter );
 
 router.use('/:pariwarId/relative', relativeRouter);
 

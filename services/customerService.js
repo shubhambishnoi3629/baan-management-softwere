@@ -30,4 +30,30 @@ export class CustomerService {
       email: { $regex: searchFrom, $options: 'i' },
     });
   }
+  async addPariwarRolesInCustomer(pariwarRole) { 
+     return this.customerModel.findOneAndUpdate( 
+      {       
+       _id: pariwarRole.customerId
+      },      {
+        $push: { pariwarRoles: pariwarRole }      
+      },
+      {        
+        new : 1
+      }
+    );  
+  }
+
+  async updatePariwarRolesInCustomer(pariwarRole) {
+    const customer = await this.customerModel.findOne({_id: pariwarRole.customerId});
+    if (customer) {
+      const index =  customer.pariwarRoles?.findIndex(i => i.pariwarId === pariwarRole.pariwarId );
+
+      if (index > -1) {
+        customer.pariwarRoles.splice(index,1,pariwarRole);
+      } else {
+        await this.addPariwarRolesInCustomer(pariwarRole);
+      }
+      await customer.save();
+    }
+  }
 };  

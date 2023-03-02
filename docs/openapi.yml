@@ -326,6 +326,39 @@ paths:
             application/json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/PariwarRole'
+  /pariwar/{pariwarId}/roles/{id}:
+      parameters:
+        - $ref: '#/components/parameters/PariwarId'
+        - $ref: '#/components/parameters/ResourceId'
+      put:
+        security:
+          - JWT: [ ]
+        tags:
+          - PariwarRoles
+        operationId: updateRole
+        summary: to update a role
+        requestBody:
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PariwarRoleBase'
+        responses:
+          '200':
+            description: update role
+            content:
+              application/json; charset=utf-8:
+                schema:
+                  $ref: '#/components/schemas/PariwarRole'
+      delete:
+        security:
+          - JWT: [ ]
+        tags:
+          - PariwarRoles
+        operationId: deleterole
+        summary: to delete a role
+        responses:
+          '200':
+            description: ok
   /pariwar/{pariwarId}/nimta:
     parameters:
       - $ref: '#/components/parameters/PariwarId'
@@ -669,7 +702,7 @@ components:
       properties:
         role:
           type: string
-          example: brother
+          example: user
         customerId:
           type: string
           example: aaas-ssss-dddd-dddd
@@ -735,7 +768,7 @@ components:
     RelativeList:
       type: array
       items:
-        $ref: '#/components/schemas/Relative'
+        $ref: '#/components/schemas/Relative' 
     PariwarRoleList:
       type: array
       items:
