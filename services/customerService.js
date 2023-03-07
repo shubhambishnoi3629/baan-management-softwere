@@ -1,7 +1,9 @@
 export class CustomerService {
-  customerModel
-  constructor(customerModel) {
+  customerModel;
+  bhaaiService;
+  constructor(customerModel, bhaaiService) {
     this.customerModel = customerModel;
+    this.bhaaiService = bhaaiService;
    };
 
   async createCustomer(data) {
@@ -13,7 +15,7 @@ export class CustomerService {
     }
 
     customer = await this.customerModel.create(data);
-
+    this.bhaaiService.getOrCreateBhaai();
     return customer;
   }
 

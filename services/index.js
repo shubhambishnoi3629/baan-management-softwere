@@ -16,7 +16,7 @@ import { SecurityService } from "./securityService.js";
 
 export const baanService = new BaanService(BaanModel);
 export const bhaaiService = new BhaaiService(BhaaiModel);
-export const customerService = new CustomerService(CustomerModel);
+export const customerService = new CustomerService(CustomerModel, bhaaiService);
 export const nimtaService = new NimtaService(NimtaModel);
 export const pariwarRolesService = new PariwarRolesService(PariwarRolesModel, customerService);
 export const pariwarService = new PariwarService(PariwarModel, pariwarRolesService);
