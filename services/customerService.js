@@ -20,14 +20,31 @@ export class CustomerService {
   }
 
   async login(email, password) {
-    return this.customerModel.findOne({
+    let customer = await this.customerModel.findOne({
       email: email,
       password: password,
     });
+
+    if (customer) {
+      customer = this.sanitizeCustomer(customer.toJSON());
+    }
+
+    return customer;
+  }
+
+  async getCustomerProfile(id){
+    let customer = await this.customerModel.findOne({
+      _id: id,
+    });
+
+    if (customer) {
+      customer = this.sanitizeCustomer(customer.toJSON());
+    }
+
+    return customer;
   }
 
   async search(searchFrom){
-    console.log(searchFrom)
     return this.customerModel.find({
       email: { $regex: searchFrom, $options: 'i' },
     });
@@ -59,4 +76,10 @@ export class CustomerService {
       await customer.save();
     }
   };
+
+  sanitizeCustomer(customer) {
+    delete customer.password;
+
+    return customer;
+  }
 };  

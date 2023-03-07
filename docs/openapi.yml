@@ -532,7 +532,22 @@ paths:
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/CustomerList'              
+                $ref: '#/components/schemas/CustomerList'   
+  /profile:
+    get:
+      security:
+        - JWT: [ ]
+      tags:
+        - Customer
+      operationId: getProfile
+      summary: to find a customer profile
+      responses:
+        '200':
+          description: Get customer profile
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Customer'              
 
 components:
   parameters:
