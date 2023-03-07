@@ -5,7 +5,7 @@ export class BaanController {
 
   static async getBaan(req, res) {
     const customer = jwtAuthentication.verifyToken(req); 
-    const baan = await baanService.getBaan(
+    const baan = await baanService.getAll(
       req.params.bhaaiId,
       customer._id
     );
