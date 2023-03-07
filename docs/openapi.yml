@@ -547,7 +547,7 @@ paths:
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/Customer'              
+                $ref: '#/components/schemas/Profile'              
 
 components:
   parameters:
@@ -796,7 +796,18 @@ components:
       type: array
       items: 
         $ref: '#/components/schemas/NimtaBase'
-
+    Profile:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: '#/components/schemas/CustomerBase'
+      properties:
+        pariwarRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/PariwarRole'
+      required:
+        - pariwarRoles
     CustomerBase:
       type: object
       properties:

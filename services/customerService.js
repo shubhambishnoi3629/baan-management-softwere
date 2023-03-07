@@ -26,7 +26,8 @@ export class CustomerService {
     });
 
     if (customer) {
-      customer = this.sanitizeCustomer(customer.toJSON());
+      console.log(customer);
+      customer = this.sanitizeCustomer(customer);
     }
 
     return customer;
@@ -38,7 +39,7 @@ export class CustomerService {
     });
 
     if (customer) {
-      customer = this.sanitizeCustomer(customer.toJSON());
+      customer = this.sanitizeCustomer(customer);
     }
 
     return customer;
