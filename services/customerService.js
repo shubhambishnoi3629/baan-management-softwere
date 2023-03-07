@@ -15,7 +15,7 @@ export class CustomerService {
     }
 
     customer = await this.customerModel.create(data);
-    this.bhaaiService.getOrCreateBhaai();
+    await this.bhaaiService.getOrCreateBhaai("BAAN GIVEN", customer._id);
     return customer;
   }
 
