@@ -77,7 +77,7 @@ export class BaanService {
 
   async deleteBaanById(id, customerId) {
     return this.baanModel.deleteOne({
-      id: id,
+      _id: id,
       customerId,
     });
   }

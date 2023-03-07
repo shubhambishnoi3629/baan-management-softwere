@@ -1,13 +1,12 @@
 export class RelativeService {
-  relativeModel
+  relativeModel;
   constructor(relativeModel) {
     this.relativeModel = relativeModel
-   };
+  };
 
-  async getAll(pariwarId, customerId) {
+  async getAll(pariwarId) {
     return this.relativeModel.find({
       pariwarId: pariwarId,
-      customerId,
     });
   }
 
@@ -17,11 +16,10 @@ export class RelativeService {
     return relative;
   }
 
-  async updateRelativeById(id, data, customerId) {
+  async updateRelativeById(id, data) {
     const relative = await this.relativeModel.findOneAndUpdate(
       { 
         _id: id,
-        customerId,
       },
       {
         $set: data
@@ -34,14 +32,13 @@ export class RelativeService {
     return relative;
   }
 
-  async deleteRelativeById(id, customerId) {
+  async deleteRelativeById(id) {
     return this.relativeModel.deleteOne({
       id: id,
-      customerId,
     });
   }
 
-  async createRelativeByBaans(baans, pariwarId, customerId) {
+  async createRelativeByBaans(baans, pariwarId) {
     const data = baans.map(
       (baan) => {
         return {
@@ -51,22 +48,21 @@ export class RelativeService {
           address: baan.address,
           nickName: baan.nickName,
           pariwarId,
-          customerId,
         };
       }
     );
     const createRelativeData = [];
     const oldRelative = [];
-    for (const relativeBase of data ) {
+    for (const relativeBase of data) {
       const oldRelative = await this.checkRelative(relativeBase);
-      if(oldRelative){
+      if(oldRelative) {
         oldRelative.push(oldRelative);
-      }else {
+      } else {
         createRelativeData.push(relativeBase);
       }
     }
 
-     const relative = await this.relativeModel.create(createRelativeData);
+    const relative = await this.relativeModel.create(createRelativeData);
 
     return [
       ...relative,
@@ -81,8 +77,7 @@ export class RelativeService {
       fathersName: relativeBase.fatherName,
       address: relativeBase.address,
       nickName: relativeBase.nickName,
-      pariwarId: relativeBase.pariwarId,
-      customerId: relativeBase.customerId
+      pariwarId: relativeBase.pariwarId
     });
   }
 }

@@ -12,8 +12,7 @@ export const pariwarRolesSchema = new mongoose.Schema({
   },
   customerId: {
     required: true,
-    type: String,
-    unique: true
+    type: String
   },
   pariwarId: {
     required: true,

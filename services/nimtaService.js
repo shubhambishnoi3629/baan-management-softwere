@@ -5,24 +5,22 @@ export class NimtaService {
     this.nimtaModel = nimtaModel
    };
 
-  async getNimta(pariwarId, customerId) {
+  async getNimta(pariwarId) {
     return  this.nimtaModel.find({
       pariwarId: pariwarId,
-      customerId,
     });
   }
 
   async createNimta(data) {
-    const nimta = await  this.nimtaModel.create(data);
+    const nimta = await this.nimtaModel.create(data);
 
     return nimta;
   }
 
-  async updateNimtaById(id, data, customerId) {
+  async updateNimtaById(id, data) {
     const nimta = await  this.nimtaModel.findOneAndUpdate(
       { 
         _id: id,
-        customerId,
       },
       {
         $set: data
@@ -35,10 +33,9 @@ export class NimtaService {
     return nimta;
   }
 
-  async deleteNimtaById(id, customerId) {
+  async deleteNimtaById(id) {
     return  this.nimtaModel.deleteOne({
       id: id,
-      customerId,
     });
   }
 

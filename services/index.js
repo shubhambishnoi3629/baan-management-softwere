@@ -12,7 +12,7 @@ import { NimtaModel } from "../models/nimtaModel.js";
 import { PariwarModel } from "../models/pariwarModel.js";
 import { RelativeModel } from "../models/relativeModel.js";
 import { PariwarRolesModel } from "../models/pariwarRolesModel.js";
-
+import { SecurityService } from "./securityService.js";
 
 export const baanService = new BaanService(BaanModel);
 export const bhaaiService = new BhaaiService(BhaaiModel);
@@ -21,3 +21,4 @@ export const nimtaService = new NimtaService(NimtaModel);
 export const pariwarRolesService = new PariwarRolesService(PariwarRolesModel, customerService);
 export const pariwarService = new PariwarService(PariwarModel, pariwarRolesService);
 export const relativeService = new RelativeService(RelativeModel);
+export const securityService = new SecurityService();

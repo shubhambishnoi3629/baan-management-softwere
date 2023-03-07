@@ -14,6 +14,11 @@ const nimtaSchema = new mongoose.Schema({
     required: true,
     type: Array
   },
+  pariwarId: {
+    required: true,
+    type: String
+
+  }
 });  
 
 export const NimtaModel = mongoose.model('nimta', nimtaSchema);  

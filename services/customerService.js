@@ -30,6 +30,7 @@ export class CustomerService {
       email: { $regex: searchFrom, $options: 'i' },
     });
   }
+
   async addPariwarRolesInCustomer(pariwarRole) { 
      return this.customerModel.findOneAndUpdate( 
       {       
@@ -55,5 +56,5 @@ export class CustomerService {
       }
       await customer.save();
     }
-  }
+  };
 };  

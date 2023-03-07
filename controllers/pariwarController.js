@@ -1,4 +1,4 @@
-import { pariwarService } from "../services/index.js";
+import { pariwarService, securityService } from "../services/index.js";
 import { jwtAuthentication } from "../utils/jwt.js";
 
 export class PariwarController {
@@ -21,12 +21,16 @@ export class PariwarController {
   }
 
   static async updatePariwarById(req, res) {
+    const customer = jwtAuthentication.verifyToken(req); 
+    securityService.checkUserInCustomer(customer, req.params.pariwarId, ['ADMIN']);
     const pariwar = await pariwarService.updatePariwarById(req.params.id, req.body);
 
     res.send(pariwar);
   }
 
   static async deletePariwarById(req, res) {
+    const customer = jwtAuthentication.verifyToken(req); 
+    securityService.checkUserInCustomer(customer, req.params.pariwarId, ['ADMIN']);
     await pariwarService.deletePariwarById(req.params.id);
 
     res.send({ success: true });

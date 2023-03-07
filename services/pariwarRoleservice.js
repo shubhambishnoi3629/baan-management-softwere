@@ -5,7 +5,7 @@ export class PariwarRolesService {
   constructor(pariwarRolesModel, customerService) {
     this.pariwarRolesModel = pariwarRolesModel;
     this.customerService = customerService;
-   };
+  };
 
   async getPariwarRoles(pariwarId, customerId) {
     return this.pariwarRolesModel.find({
