@@ -9,6 +9,10 @@ const pariwarSchema = new mongoose.Schema({
   name: {
     required: true,
     type: String
+  },
+  customerId: {
+    required: true,
+    type: String
   }
 });  
 
