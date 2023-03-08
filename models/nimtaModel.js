@@ -10,10 +10,10 @@ const nimtaSchema = new mongoose.Schema({
     required: true,
     type: String
   },
-  relative: {
+  relative: [{
     required: true,
-    type: Array
-  },
+    type: String
+  }],
   pariwarId: {
     required: true,
     type: String

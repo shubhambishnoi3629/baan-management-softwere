@@ -8,6 +8,9 @@ export class NimtaService {
   async getNimta(pariwarId) {
     return  this.nimtaModel.find({
       pariwarId: pariwarId,
+    }).populate({ 
+      path: 'relative',
+      model: 'relative'
     });
   }
 
