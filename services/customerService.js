@@ -36,7 +36,13 @@ export class CustomerService {
   async getCustomerProfile(id){
     let customer = await this.customerModel.findOne({
       _id: id,
-    });
+    }).populate({ 
+      path: 'pariwarRoles',
+      populate: {
+        path: 'pariwarId',
+        model: 'pariwar'
+      } 
+   });
 
     if (customer) {
       customer = this.sanitizeCustomer(customer);

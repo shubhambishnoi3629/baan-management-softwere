@@ -26,7 +26,7 @@ export class RelativeController {
 
   static async updateRelativeById(req, res) {
     const customer = jwtAuthentication.verifyToken(req);  
-    securityService.checkUserInCustomer(customer, req.params.pariwarId, ['ADMIN']);
+   securityService.checkUserInCustomer(customer, req.params.pariwarId, ['ADMIN']);
     const relative = await relativeService.updateRelativeById(req.params.id, req.body);
 
     res.send(relative);

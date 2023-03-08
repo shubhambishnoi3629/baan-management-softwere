@@ -10,7 +10,6 @@ const pariwarSchema = new mongoose.Schema({
     required: true,
     type: String
   }
-  
 });  
 
 export const PariwarModel = mongoose.model('pariwar', pariwarSchema);  

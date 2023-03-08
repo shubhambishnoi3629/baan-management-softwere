@@ -679,7 +679,7 @@ components:
           type: string
           example: gholio 
         phoneNumber:
-          type: number
+          type: string
           example: 12345 
         details:
           type: string

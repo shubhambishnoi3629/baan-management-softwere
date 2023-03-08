@@ -35,7 +35,7 @@ export class NimtaService {
 
   async deleteNimtaById(id) {
     return  this.nimtaModel.deleteOne({
-      id: id,
+      _id: id,
     });
   }
 

@@ -34,7 +34,7 @@ export class RelativeService {
 
   async deleteRelativeById(id) {
     return this.relativeModel.deleteOne({
-      id: id,
+      _id: id,
     });
   }
 
