@@ -50,7 +50,7 @@ export class NimtaService {
         
       },
       {
-        $push: {relative: Ids}
+        $addToSet: {relative: Ids}
       },
       {
         new: 1
