@@ -48,7 +48,7 @@ export class BaanService {
       },
     ]));
     
-    return agg[0].sum;
+    return agg[0] ? agg[0].sum : 0;
   }
 
   async getBaanById(id, customerId) {
