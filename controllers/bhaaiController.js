@@ -39,7 +39,7 @@ export class BhaaiController {
 
   static async deleteBhaaiById(req, res) {
     await bhaaiService.deleteBhaaiById(req.params.id);
-    await bhaaiService.deleteAllBaanByBhaaiId(req.params.id);
+    await baanService.deleteAllBaanByBhaaiId(req.params.id);
     res.send({ success: true });
   }
 
