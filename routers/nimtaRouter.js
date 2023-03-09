@@ -15,4 +15,6 @@ router.delete('/:id', handelError(NimtaController.deleteNimtaById));
 
 router.post('/:id/addRelative', handelError(NimtaController.addRelativeByIds)); 
 
+router.delete('/:nimtaId/removeRelative/:id', handelError(NimtaController.removeRelative)); 
+
 export const nimtaRouter = router;

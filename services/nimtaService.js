@@ -44,10 +44,9 @@ export class NimtaService {
 
 
   async addRelativeById(id, Ids) {
-    const relative = await  this.nimtaModel.findOneAndUpdate(
+    const nimta = await  this.nimtaModel.findOneAndUpdate(
       { 
         _id: id,
-        
       },
       {
         $addToSet: {relative: Ids}
@@ -57,7 +56,23 @@ export class NimtaService {
       }
     );
 
-    return relative;
-    
+    return nimta;
+  }
+
+
+  async removeRelative(id, relativeId) {
+    const nimta = await  this.nimtaModel.findOneAndUpdate(
+      { 
+        _id: id,
+      },
+      {
+        $pull: {relative: relativeId}
+      },
+      {
+        new: 1
+      }
+    );
+
+    return nimta;
   }
 }

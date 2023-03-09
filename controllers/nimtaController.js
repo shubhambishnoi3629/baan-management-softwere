@@ -59,4 +59,16 @@ export class NimtaController {
     res.send(nimta);
 
   }
+
+  static async removeRelative(req,res) {
+    const customer = jwtAuthentication.verifyToken(req); 
+    securityService.checkUserInCustomer(customer, req.params.pariwarId, ['ADMIN']);
+    const nimta = await nimtaService.removeRelative(
+      req.params.nimtaId,
+      req.params.id,
+    );
+
+    res.send(nimta);
+
+  }
 }
