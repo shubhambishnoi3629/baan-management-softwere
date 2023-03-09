@@ -19,6 +19,8 @@ router.get('/customer', handelError(CustomerController.search));
 
 router.get('/profile',  handelError(CustomerController.profile));
 
+router.get('/baan',  handelError(BaanController.getAllBaan));
+
 router.get('/search',  handelError(BaanController.searchBaan));
 
 router.post('/giveBaan', handelError(BhaaiController.giveBaan));

@@ -123,6 +123,21 @@ paths:
       responses:
         '200':
           description: ok
+  /baan:
+    get:
+      security:
+        - JWT: [ ]
+      tags:
+        - Baan
+      operationId: getBaan
+      summary: to get all baan of customer 
+      responses:
+        '200':
+          description: List of baan
+          content:
+            application/json; chartset=utf-8:
+              schema:
+                $ref: '#/components/schemas/BaanList'
   /bhaai/{bhaaiId}/baan:
     parameters:
       - $ref: '#/components/parameters/BhaaiId'

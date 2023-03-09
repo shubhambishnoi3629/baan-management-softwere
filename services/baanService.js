@@ -4,7 +4,13 @@ export class BaanService {
     this.baanModel = baanModel;
    };
 
-  async getAll(bhaaiId, customerId) {
+  async getAll(customerId) {
+    return this.baanModel.find({
+      customerId,
+    });
+  }
+
+  async getBaan(bhaaiId, customerId) {
     return this.baanModel.find({
       bhaaiId: bhaaiId,
       customerId,

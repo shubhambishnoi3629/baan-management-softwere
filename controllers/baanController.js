@@ -3,9 +3,18 @@ import { jwtAuthentication } from "../utils/jwt.js";
 
 export class BaanController {
 
-  static async getBaan(req, res) {
+  static async getAllBaan(req, res) {
     const customer = jwtAuthentication.verifyToken(req); 
     const baan = await baanService.getAll(
+      customer._id
+    );
+
+    res.send(baan);
+  }
+
+  static async getBaan(req, res) {
+    const customer = jwtAuthentication.verifyToken(req); 
+    const baan = await baanService.getBaan(
       req.params.bhaaiId,
       customer._id
     );
