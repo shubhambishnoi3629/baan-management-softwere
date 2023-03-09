@@ -3,7 +3,7 @@ info:
   title : Baan management API overview
   version: 1.0.0
 servers:
-  - url: http://localhost:3000/api
+  - url: /api
 paths:
   /auth/login:
     post:
