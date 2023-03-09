@@ -44,7 +44,7 @@ export class RelativeService {
         return {
           firstName: baan.firstName,
           lastName: baan.lastName,
-          fathersName: baan.fatherName,
+          fathersName: baan.fathersName,
           address: baan.address,
           nickName: baan.nickName,
           pariwarId,
@@ -54,9 +54,9 @@ export class RelativeService {
     const createRelativeData = [];
     const oldRelative = [];
     for (const relativeBase of data) {
-      const oldRelative = await this.checkRelative(relativeBase);
-      if(oldRelative) {
-        oldRelative.push(oldRelative);
+      const isOldRelative = await this.checkRelative(relativeBase, pariwarId);
+      if(isOldRelative) {
+        oldRelative.push(relativeBase);
       } else {
         createRelativeData.push(relativeBase);
       }
@@ -70,14 +70,14 @@ export class RelativeService {
     ];
   }
 
-  async checkRelative(relativeBase) {
+  async checkRelative(relativeBase, pariwarId) {
     return this.relativeModel.findOne({
       firstName: relativeBase.firstName,
       lastName: relativeBase.lastName,
-      fathersName: relativeBase.fatherName,
+      fathersName: relativeBase.fathersName,
       address: relativeBase.address,
       nickName: relativeBase.nickName,
-      pariwarId: relativeBase.pariwarId
+      pariwarId,
     });
   }
 }

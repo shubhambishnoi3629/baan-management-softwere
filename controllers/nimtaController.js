@@ -47,7 +47,7 @@ export class NimtaController {
     securityService.checkUserInCustomer(customer, req.params.pariwarId, ['ADMIN']);
     const relativeIds = req.body.relativeIds;
     const baanIds = req.body.baanIds;
-    const baans = await baanService.getBaanByIds(baanIds);
+    const baans = await baanService.getBaanByIds(baanIds, customer._id);
     const newRelative = await relativeService.createRelativeByBaans(baans, req.params.pariwarId);
 
     newRelative.forEach(relative => {

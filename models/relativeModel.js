@@ -27,7 +27,7 @@ const relativeSchema = new mongoose.Schema({
     type: String
   },
   phoneNumber: {
-    required: true,
+    required: false,
     type: String
   },
   details:{
