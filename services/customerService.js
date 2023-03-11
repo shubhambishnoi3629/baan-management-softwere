@@ -1,3 +1,6 @@
+import { tokenManagment } from "../helper/tokenManagement.js";
+import { jwtAuthentication } from "../utils/jwt.js";
+
 export class CustomerService {
   customerModel;
   bhaaiService;
@@ -58,7 +61,7 @@ export class CustomerService {
   }
 
   async addPariwarRolesInCustomer(pariwarRole) { 
-     return this.customerModel.findOneAndUpdate( 
+    const customer = await this.customerModel.findOneAndUpdate( 
       {       
        _id: pariwarRole.customerId
       },      {
@@ -68,6 +71,9 @@ export class CustomerService {
         new : 1
       }
     );  
+    customer && await this.updateCustomerToken(customer._id);
+
+    return customer;
   }
 
   async updatePariwarRolesInCustomer(pariwarRole) {
@@ -81,8 +87,19 @@ export class CustomerService {
         await this.addPariwarRolesInCustomer(pariwarRole);
       }
       await customer.save();
+      this.updateCustomerToken(customer._id);
     }
   };
+
+  async updateCustomerToken(customerId) {
+    const customer = await this.customerModel.findOne({
+      _id: customerId,
+    });
+
+    const customerToken = jwtAuthentication.createToken(customer.toJSON());
+
+    tokenManagment.saveToken(customerId, customerToken);
+  }
 
   sanitizeCustomer(customer) {
     delete customer.password;

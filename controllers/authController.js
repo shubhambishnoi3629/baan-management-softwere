@@ -1,5 +1,6 @@
 import { customerService } from "../services/index.js";
 import { jwtAuthentication } from "../utils/jwt.js";
+import { tokenManagment } from "../helper/tokenManagement.js";
 
 export class AuthController {
 
@@ -8,11 +9,17 @@ export class AuthController {
 
     if (!customer) {
       res.status(404).send({
-        message: 'customer not found',
+        message: 'Email and Password is not correct',
       });
     } else {
+      tokenManagment.saveToken(
+        customer._id,
+        jwtAuthentication.createToken(customer.toJSON())
+      );
       res.send({
-        access_token: jwtAuthentication.createToken(customer.toJSON())
+        access_token: jwtAuthentication.createToken({
+          _id: customer._id,
+        })
       });
     }
   }

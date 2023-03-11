@@ -1,5 +1,6 @@
 import { environment } from "../environment.js";
 import jwt from "jsonwebtoken";
+import { tokenManagment } from "../helper/tokenManagement.js";
 
 class JWT {
 
@@ -21,7 +22,15 @@ class JWT {
         message: "access denied",
       };
     } else {
-      return jwt.decode(token?.split(" ")[1]);
+      const { _id } = jwt.decode(token?.split(" ")[1]);
+      const customerToken = tokenManagment.getToken(_id);
+      if (!customerToken) {
+        throw {
+          message: "access denied",
+        };
+      }
+
+      return jwt.decode(customerToken);
     }
   }
 }
