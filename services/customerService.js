@@ -29,7 +29,6 @@ export class CustomerService {
     });
 
     if (customer) {
-      console.log(customer);
       customer = this.sanitizeCustomer(customer);
     }
 
@@ -90,7 +89,18 @@ export class CustomerService {
       this.updateCustomerToken(customer._id);
     }
   };
+  async deletePariwarRoleInCustomer(pariwarRole) {
+    const customer = await this.customerModel.findOne({_id: pariwarRole.customerId});
+    if (customer) {
+      const index =  customer.pariwarRoles?.findIndex(i => i.pariwarId === pariwarRole.pariwarId );
 
+      if (index > -1) {
+        customer.pariwarRoles.splice(index,1);
+        await customer.save();
+        this.updateCustomerToken(customer._id);
+      }
+    }
+  };
   async updateCustomerToken(customerId) {
     const customer = await this.customerModel.findOne({
       _id: customerId,

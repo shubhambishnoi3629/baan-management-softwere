@@ -44,4 +44,16 @@ export class PariwarRolesService {
       customerId,
     });
   }
+
+  async deletePariwarRoleInPariwar (pariwarId) {
+    const pariwarRoles = await this.pariwarRolesModel.find({
+      pariwarId : pariwarId,
+    });
+    await this.pariwarRolesModel.deleteMany({
+      pariwarId : pariwarId 
+    })
+    for (let pariwarRole of pariwarRoles){
+      await this.customerService.deletePariwarRoleInCustomer(pariwarRole)
+    };
+  }
 }

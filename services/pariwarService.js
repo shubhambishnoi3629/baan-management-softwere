@@ -40,8 +40,9 @@ export class PariwarService {
   }
 
   async deletePariwarById(id) {
-    return this.pariwarModel.deleteOne({
+    await this.pariwarModel.deleteOne({
       _id: id,
-    });
+    }),
+    await this.pariwarRoleService.deletePariwarRoleInPariwar(id)
   }
 }
