@@ -20,5 +20,5 @@ export const customerService = new CustomerService(CustomerModel, bhaaiService);
 export const nimtaService = new NimtaService(NimtaModel);
 export const pariwarRolesService = new PariwarRolesService(PariwarRolesModel, customerService);
 export const pariwarService = new PariwarService(PariwarModel, pariwarRolesService);
-export const relativeService = new RelativeService(RelativeModel);
+export const relativeService = new RelativeService(RelativeModel, nimtaService);
 export const securityService = new SecurityService();

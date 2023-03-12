@@ -1,7 +1,9 @@
 export class RelativeService {
   relativeModel;
-  constructor(relativeModel) {
-    this.relativeModel = relativeModel
+  nimtaService;
+  constructor(relativeModel, nimtaService) {
+    this.relativeModel = relativeModel;
+    this.nimtaService = nimtaService;
   };
 
   async getAll(pariwarId) {
@@ -33,6 +35,8 @@ export class RelativeService {
   }
 
   async deleteRelativeById(id) {
+    await this.nimtaService.removeRelativeByRelatveId(id);
+
     return this.relativeModel.deleteOne({
       _id: id,
     });

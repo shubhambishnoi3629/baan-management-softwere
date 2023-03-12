@@ -75,4 +75,21 @@ export class NimtaService {
 
     return nimta;
   }
+
+
+  async removeRelativeByRelatveId(relativeId) {
+    const nimta = await this.nimtaModel.updateMany(
+      { 
+        relative: relativeId,
+      },
+      {
+        $pull: {relative: relativeId}
+      },
+      {
+        new: 1
+      }
+    );
+
+    return nimta;
+  }
 }
