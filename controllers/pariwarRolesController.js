@@ -1,11 +1,9 @@
 import { pariwarRolesService, securityService } from "../services/index.js";
-import { jwtAuthentication } from "../utils/jwt.js";
 
 export class PariwarRolesController {
 
   static async getPariwarRoles(req, res) {
-    const customer = jwtAuthentication.verifyToken(req); 
-    securityService.checkUserInCustomer(customer, req.params.pariwarId);
+    securityService.checkUserInCustomer(req.user, req.params.pariwarId);
     const pariwarRoles = await pariwarRolesService.getPariwar(
       req. params.pariwarId,
     );
@@ -14,8 +12,7 @@ export class PariwarRolesController {
   }
 
   static async createPariwarRoles (req, res) {
-    const customer = jwtAuthentication.verifyToken(req);  
-    securityService.checkUserInCustomer(customer, req.params.pariwarId, ['ADMIN']);
+    securityService.checkUserInCustomer(req.user, req.params.pariwarId, ['ADMIN']);
     const pariwarRoles = await pariwarRolesService.createPariwar({
       ...req.body,
       pariwarId: req. params.pariwarId,
@@ -25,19 +22,17 @@ export class PariwarRolesController {
   }
   
   static async updatePariwarRole (req,res) {    
-    const customer = jwtAuthentication.verifyToken(req);
-    securityService.checkUserInCustomer(customer, req.params.pariwarId, ['ADMIN']);  
+    securityService.checkUserInCustomer(req.user, req.params.pariwarId, ['ADMIN']);  
     const pariwarRole = await pariwarRolesService.updatePariwarRole(req.params.id,       
       req.body, 
-      customer._id);
+      req.user._id);
 
     res.send(pariwarRole); 
   }
 
   static async deletePariwarRole (req, res) {
-    const customer = jwtAuthentication.verifyToken(req); 
-    securityService.checkUserInCustomer(customer, req.params.pariwarId, ['ADMIN']);
-    await pariwarRolesService.deletePariwarRole(req.params.id, customer._id);
+    securityService.checkUserInCustomer(req.user, req.params.pariwarId, ['ADMIN']);
+    await pariwarRolesService.deletePariwarRole(req.params.id, req.user._id);
 
     res.send({ success: true });
   }

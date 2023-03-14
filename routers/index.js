@@ -6,23 +6,26 @@ import { BhaaiController } from '../controllers/bhaaiController.js';
 import { handelError } from '../utils/errorHandler.js';
 import { pariwarRouter } from './pariwarRouter.js';
 import { CustomerController } from '../controllers/customerController.js';
+import { authMiddleware } from '../middleware/auth.js';
 
 const router = Router();
 
-router.use('/pariwar', pariwarRouter );
+router.use('/pariwar', authMiddleware, pariwarRouter);
 
-router.use('/bhaai', bhaaiRouter);
+router.use('/bhaai', authMiddleware, bhaaiRouter);
 
 router.use('/auth', authRouter);
 
-router.get('/customer', handelError(CustomerController.search));
+router.get('/customer', authMiddleware, handelError(CustomerController.search));
 
-router.get('/profile',  handelError(CustomerController.profile));
+router.get('/profile',  authMiddleware, handelError(CustomerController.profile));
 
-router.get('/baan',  handelError(BaanController.getAllBaan));
+router.put('/profile',  authMiddleware, handelError(CustomerController.updateCustomer));
 
-router.get('/search',  handelError(BaanController.searchBaan));
+router.get('/baan',  authMiddleware, handelError(BaanController.getAllBaan));
 
-router.post('/giveBaan', handelError(BhaaiController.giveBaan));
+router.get('/search',  authMiddleware, handelError(BaanController.searchBaan));
+
+router.post('/giveBaan', authMiddleware, handelError(BhaaiController.giveBaan));
 
 export const appRouter = router;

@@ -1,11 +1,9 @@
 import { customerService} from "../services/index.js";
-import { jwtAuthentication } from "../utils/jwt.js";
 
 export class CustomerController {
 
   static async profile(req, res) {
-    const customer = jwtAuthentication.verifyToken(req);
-    const profile = await customerService.getCustomerProfile(customer._id);
+    const profile = await customerService.getCustomerProfile(req.user._id);
 
     if (!profile) {
       res.status(404).send({
@@ -16,8 +14,13 @@ export class CustomerController {
     }
   }
 
-  static async search(req, res) {
-    jwtAuthentication.verifyToken(req);
+  static async updateCustomer(req, res) {
+    await customerService.updateCustomer(req.user._id, req.body);
+    
+    res.send({ success: true });
+  }
+
+  static async search(req, res) {;
     const searchFrom = req.query.email;
     const customers = await customerService.search(searchFrom);
 

@@ -7,6 +7,8 @@ import bodyParser from 'body-parser';
 import { database } from './database/db.js';
 import cors from 'cors';
 import fs from 'fs'
+import { santizeInput } from './middleware/senitizeInput.js';
+
 
 const app = express();
 
@@ -15,6 +17,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 database.init();
+
+app.use(santizeInput);
 
 const swaggerDocument = YAML.load("./docs/openapi.yml");
 app.use('/api-docs', swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerDocument));

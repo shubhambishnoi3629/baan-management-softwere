@@ -25,6 +25,18 @@ const customerSchema = new mongoose.Schema({
     required: true,
     type: pariwarRolesSchema
   }],
+  firstName: {
+    required: false,
+    type: String
+  }, 
+  lastName: {
+    required: false,
+    type: String
+  },
+  username: {
+    required: false,
+    type: String
+  } 
 });
 
 export const CustomerModel = mongoose.model('Customer', customerSchema);

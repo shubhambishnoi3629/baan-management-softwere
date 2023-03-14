@@ -1,33 +1,29 @@
 import { baanService, bhaaiService } from "../services/index.js";
-import { jwtAuthentication } from "../utils/jwt.js";
 
 export class BhaaiController {
 
-  static async getBhaai(req, res) {
-    const customer = jwtAuthentication.verifyToken(req);  
-    const bhaai = await bhaaiService.getAll(customer._id);
+  static async getBhaai(req, res) { 
+    const bhaai = await bhaaiService.getAll(req.user._id);
 
     res.send(bhaai);
   }
 
   static async createBhaai (req, res) {
-    const customer = jwtAuthentication.verifyToken(req);  
     const bhaai = await bhaaiService.createBhaai({
       ...req.body,
-      customerId: customer._id,
+      customerId: req.user._id,
     });
 
     res.send(bhaai);
   }
 
   static async getBhaaiById(req, res) {
-    const customer = jwtAuthentication.verifyToken(req);
     const isTotal = req.query.total;
-    const bhaai = await bhaaiService.getBhaaiById(req.params.id, customer._id);
+    const bhaai = await bhaaiService.getBhaaiById(req.params.id, req.user._id);
   
     res.send({
       ...bhaai.toJSON(),
-      total: isTotal == 1 ? await baanService.getTotalAmount(req.params.id, customer._id) : 0
+      total: isTotal == 1 ? await baanService.getTotalAmount(req.params.id, req.user._id) : 0
     });
   }
 
@@ -44,9 +40,8 @@ export class BhaaiController {
   }
 
   static async giveBaan (req, res) {
-    const customer = jwtAuthentication.verifyToken(req); 
-    const bhaai = await bhaaiService.getOrCreateBhaai("BAAN GIVEN", customer._id);
-    const baan = await baanService.getBaanById(req.body.baanId, customer._id );
+    const bhaai = await bhaaiService.getOrCreateBhaai("BAAN GIVEN", req.user._id);
+    const baan = await baanService.getBaanById(req.body.baanId, req.user._id );
     const newBaan = await baanService.createBaan({
       firstName: baan.firstName,
       lastName: baan.lastName,
@@ -55,7 +50,7 @@ export class BhaaiController {
       nickName: baan.nickName,
       bhaaiId: bhaai._id,
       amount: -req.body.amount,
-      customerId: customer._id
+      customerId: req.user._id
     });
 
     res.send(newBaan);

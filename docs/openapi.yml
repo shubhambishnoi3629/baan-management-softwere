@@ -15,7 +15,7 @@ paths:
         content:
           application/json; charset=utf-8:
             schema:
-              $ref: '#/components/schemas/CustomerBase'
+              $ref: '#/components/schemas/Login'
       responses:
         "200":
           description: login token
@@ -33,7 +33,7 @@ paths:
         content:
           application/json; charset=utf-8:
             schema:
-              $ref: '#/components/schemas/CustomerBase'
+              $ref: '#/components/schemas/Login'
       responses:
         "200":
           description: login token
@@ -577,7 +577,22 @@ paths:
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/Profile'              
+                $ref: '#/components/schemas/Profile'  
+    put:
+      security:
+        - JWT: [ ]
+      tags:
+        - Customer
+      operationId: updateProfile
+      summary: to update a profile
+      requestBody:
+        content:
+          application/json; charset=utf-8:
+            schema:
+              $ref: '#/components/schemas/CustomerBase'
+      responses:
+        '200':
+          description: ok            
 
 components:
   parameters:
@@ -846,7 +861,7 @@ components:
             $ref: '#/components/schemas/PariwarRole'
       required:
         - pariwarRoles
-    CustomerBase:
+    Login:
       type: object
       properties:
         email:
@@ -858,6 +873,27 @@ components:
         password:
           type: string
           example: dksjfscsf
+      additionalProperties: false
+      required:
+        - password
+    CustomerBase:
+      type: object
+      properties:
+        email:
+          type: string
+          example: rahul@gmail.com
+        phoneNumber:
+          type: string
+          example: +919416061874
+        firstName:
+          type: string
+          example: rahul
+        lastName:
+          type: string
+          example: jajuda
+        username:
+          type: string
+          example: usrname
       additionalProperties: false
       required:
         - email

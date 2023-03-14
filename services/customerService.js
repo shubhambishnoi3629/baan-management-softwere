@@ -115,5 +115,16 @@ export class CustomerService {
     delete customer.password;
 
     return customer;
+  };
+
+  async updateCustomer(customerId, data){
+    await this.customerModel.update(
+      { 
+        _id: customerId,
+      },
+      {
+        $set: data
+      }
+    );
   }
 };  

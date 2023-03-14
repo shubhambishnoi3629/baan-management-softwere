@@ -19,6 +19,7 @@ class JWT {
     if(!verified){
       // Access Denied
       throw {
+        type: "NOT_AUTHENTICATED",
         message: "access denied",
       };
     } else {
@@ -26,6 +27,7 @@ class JWT {
       const customerToken = tokenManagment.getToken(_id);
       if (!customerToken) {
         throw {
+          type: "NOT_AUTHENTICATED",
           message: "access denied",
         };
       }
