@@ -8,6 +8,7 @@ import { database } from './database/db.js';
 import cors from 'cors';
 import fs from 'fs'
 import { santizeInput } from './middleware/senitizeInput.js';
+import { redis } from './redis/redis.js';
 
 
 const app = express();
@@ -17,6 +18,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 database.init();
+
+redis.init();
 
 app.use(santizeInput);
 

@@ -1,12 +1,13 @@
-class TokenManagment {
-  jsonWebTokenList = new Map();
+import {redis} from '../redis/redis.js';
 
-  saveToken(customerId, token) {
-    this.jsonWebTokenList.set(customerId, token);
+class TokenManagment {
+
+  async saveToken(customerId, token) {
+    await redis.client.set(customerId, token);
   };
 
-  getToken(customerId) {
-    return this.jsonWebTokenList.get(customerId);
+  async getToken(customerId) {
+    return redis.client.get(customerId);
   };
 };
 

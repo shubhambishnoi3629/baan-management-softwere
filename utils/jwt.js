@@ -12,7 +12,7 @@ class JWT {
     return jwt.sign(customer, environment.jwtSecret);
   }
 
-  verifyToken(req) {
+  async verifyToken(req) {
     const token = req.header("authorization");
 
     const verified = jwt.verify(token?.split(" ")[1], environment.jwtSecret);
@@ -24,7 +24,7 @@ class JWT {
       };
     } else {
       const { _id } = jwt.decode(token?.split(" ")[1]);
-      const customerToken = tokenManagment.getToken(_id);
+      const customerToken = await tokenManagment.getToken(_id);
       if (!customerToken) {
         throw {
           type: "NOT_AUTHENTICATED",

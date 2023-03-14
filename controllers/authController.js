@@ -12,7 +12,7 @@ export class AuthController {
         message: 'Email and Password is not correct',
       });
     } else {
-      tokenManagment.saveToken(
+      await tokenManagment.saveToken(
         customer._id,
         jwtAuthentication.createToken(customer.toJSON())
       );

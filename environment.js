@@ -7,4 +7,6 @@ export const environment = {
   appPort: process.env.APP_PORT,
   dbUrl: process.env.DB_URL,
   jwtSecret: process.env.JWT_SECRET,
+  redisUrl: process.env.REDIS_URL,
+  redisPort: process.env.REDIS_PORT,
 }

@@ -108,7 +108,7 @@ export class CustomerService {
 
     const customerToken = jwtAuthentication.createToken(customer.toJSON());
 
-    tokenManagment.saveToken(customerId, customerToken);
+    await tokenManagment.saveToken(customerId, customerToken);
   }
 
   sanitizeCustomer(customer) {
