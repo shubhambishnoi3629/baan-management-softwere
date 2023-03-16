@@ -1,6 +1,6 @@
 import { jwtAuthentication } from "../utils/jwt.js";
 
-export const authMiddleware = async ( req,res, next) => {
+export const authMiddleware = async ( req, res, next) => {
   try {
     req.user = await jwtAuthentication.verifyToken(req);
     next();
