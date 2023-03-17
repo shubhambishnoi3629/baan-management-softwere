@@ -894,6 +894,9 @@ components:
         username:
           type: string
           example: usrname
+        avatar:
+          type: string
+          example: usrname
       additionalProperties: false
       required:
         - email

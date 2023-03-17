@@ -33,6 +33,10 @@ const customerSchema = new mongoose.Schema({
     required: false,
     type: String
   },
+  avatar: {
+    required: false,
+    type: String
+  },
   username: {
     required: false,
     type: String
