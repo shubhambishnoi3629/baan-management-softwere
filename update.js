@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { environment } from './environment.js';
-import md5 from 'md4';
+import md5 from 'md5';
 
 mongoose.set('strictQuery', true);
 import { CustomerModel } from "./models/customerModel.js";
