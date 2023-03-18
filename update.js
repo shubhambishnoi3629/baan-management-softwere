@@ -13,7 +13,20 @@ db.on('error', (error) => {
 
 db.once('connected', () => {
   const customers = CustomerModel.find({});
-  console.log(customers);
+  for (const customer in customers) {
+    const id = customer._id;
+    const password = customer.password;
+    CustomerModel.findOneAndUpdate(
+      {
+        _id: id
+      },
+      {
+        $set: {
+          password: md5('sdhukfcjiw' + password + 'kwygrj'),
+        }
+      }
+    )
+  }
 });
 
 

@@ -21,7 +21,7 @@ export class NimtaService {
   }
 
   async updateNimtaById(id, data) {
-    const nimta = await  this.nimtaModel.findOneAndUpdate(
+    const nimta = await this.nimtaModel.findOneAndUpdate(
       { 
         _id: id,
       },

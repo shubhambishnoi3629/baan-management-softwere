@@ -26,7 +26,7 @@ export class BhaaiController {
       total: isTotal == 1 ? await baanService.getTotalAmount(req.params.id, req.user._id) : 0
     });
   }
-
+  
   static async updateBhaaiById(req, res) {
     const bhaai = await bhaaiService.updateBhaaiById(req.params.id, req.body);
 

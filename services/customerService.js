@@ -1,5 +1,6 @@
 import { tokenManagment } from "../helper/tokenManagement.js";
 import { jwtAuthentication } from "../utils/jwt.js";
+import md5 from 'md5';
 
 export class CustomerService {
   customerModel;
@@ -17,12 +18,14 @@ export class CustomerService {
       throw  { message: "email is already in use." };
     }
 
+    data.password = md5('sdhukfcjiw' + data.password + 'kwygrj');
     customer = await this.customerModel.create(data);
     await this.bhaaiService.getOrCreateBhaai("BAAN GIVEN", customer._id);
     return customer;
   }
 
   async login(email, password) {
+    password = md5('sdhukfcjiw' + password + 'kwygrj');
     let customer = await this.customerModel.findOne({
       email: email,
       password: password,
