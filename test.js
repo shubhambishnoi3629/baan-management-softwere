@@ -11,8 +11,8 @@ db.on('error', (error) => {
     console.log(error)
 });
 
-db.once('connected', () => {
-  const customers = CustomerModel.find({});
+db.once('connected', async () => {
+  const customers = await CustomerModel.find({});
   console.log(customers);
 });
 

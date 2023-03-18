@@ -11,12 +11,12 @@ db.on('error', (error) => {
     console.log(error)
 });
 
-db.once('connected', () => {
-  const customers = CustomerModel.find({});
-  for (const customer in customers) {
+db.once('connected', async () => {
+  const customers = await CustomerModel.find({});
+  for await (const customer of customers) {
     const id = customer._id;
     const password = customer.password;
-    CustomerModel.findOneAndUpdate(
+    await CustomerModel.findOneAndUpdate(
       {
         _id: id
       },
